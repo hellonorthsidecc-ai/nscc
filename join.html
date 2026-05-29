@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join — NSCC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #000; color: #9AA696; font-family: 'Space Mono', monospace; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  background: rgba(0,0,0,0.95);
+  border-bottom: 1px solid #111;
+}
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-links a.active { opacity: 1; }
+@media (max-width: 640px) {
+  nav { padding: 20px 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 9px; }
+}
+
+/* ── JOIN PAGE ── */
+.join-page {
+  flex: 1;
+  padding: 140px 40px 80px 40px;
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+.join-page-left {
+  flex: 1;
+}
+.join-page-title {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(3em, 6vw, 6em);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin: 0 0 24px 0;
+}
+.join-page-sub {
+  color: #4B5F45;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  max-width: 320px;
+}
+.join-page-right {
+  flex: 1;
+}
+
+/* ── FORM ── */
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.join-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.join-field label {
+  color: #4B5F45;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.join-field input,
+.join-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #1a2a18;
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 10px 0;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.join-field input:focus,
+.join-field textarea:focus {
+  border-bottom-color: #9AA696;
+}
+.join-field textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* ── CTA ── */
+.join-submit {
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.join-submit::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.join-submit:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #000;
+  border-top: 1px solid #111;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+  opacity: 0.8;
+}
+.footer-social {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.footer-social a {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.footer-social a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: #4B5F45;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.footer-social a:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+.footer-info {
+  color: #4B5F45;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 1.9;
+}
+@media (max-width: 768px) {
+  .join-page { flex-direction: column; padding: 120px 24px 60px 24px; gap: 48px; }
+  .join-page-title { font-size: clamp(2.5em, 8vw, 4em); }
+}
+@media (max-width: 640px) {
+  footer { padding: 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .footer-info { text-align: left; }
+  .footer-social { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#upcoming">Rides</a></li>
+    <li><a href="index.html#how">How</a></li>
+    <li><a href="index.html#behind">Behind</a></li>
+    <li><a href="join.html" class="active">Join</a></li>
+  </ul>
+</nav>
+
+<!-- JOIN PAGE -->
+<main class="join-page">
+  <div class="join-page-left">
+    <p class="join-page-title">Join us</p>
+    <p class="join-page-sub">No membership fees.<br>No hierarchy.<br>Just people who love rides and community.</p>
+  </div>
+  <div class="join-page-right">
+    <form class="join-form" onsubmit="handleSubmit(event)">
+      <div class="join-field">
+        <label>Name</label>
+        <input type="text" required>
+      </div>
+      <div class="join-field">
+        <label>Email</label>
+        <input type="email" required>
+      </div>
+      <div class="join-field">
+        <label>How did you find us?</label>
+        <input type="text">
+      </div>
+      <div class="join-field">
+        <label>Tell us</label>
+        <textarea></textarea>
+      </div>
+      <button type="submit" class="join-submit">Send →</button>
+    </form>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/northsidecc_/" target="_blank">Instagram</a>
+    <a href="https://www.strava.com/clubs/northsidecc" target="_blank">Strava</a>
+  </div>
+  <div class="footer-info">
+    <div>Northside Cycling Club</div>
+    <div>Valtellina, IT · Est. 2026</div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('.join-submit');
+  btn.innerText = 'Sent ✓';
+  btn.style.color = '#4B5F45';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
