@@ -72,7 +72,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.70);
   z-index: 0;
 }
 #hero > * { position: relative; z-index: 1; }
@@ -122,19 +122,75 @@ nav {
   margin: 0;
   white-space: nowrap;
 }
+/* ── UNDERLINE ANIMATION (sx→dx) ── */
+.underline-anim {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.underline-anim::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: #9AA696;
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+.underline-anim:hover::after { width: 100%; }
+.underline-anim:hover { color: #9AA696; }
+
+/* ── CTA UNDERLINE ── */
+.hero-btn,
+.event-btn,
+.join-submit {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hero-btn::after,
+.event-btn::after,
+.join-submit::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+}
+.hero-btn:hover::after,
+.event-btn:hover::after,
+.join-submit:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+
 .hero-btn {
   color: #9AA696;
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border: 1px solid #9AA696;
-  padding: 12px 32px;
-  text-decoration: none;
-  background: transparent;
-  white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
 }
-.hero-btn:hover { background: #9AA696; color: #000; }
+@media (max-width: 768px) { .hero-btn { font-size: 9px; } }
 .cursor {
   display: inline-block;
   width: 2px;
@@ -151,20 +207,21 @@ nav {
   .hero-claim { font-size: 9px; white-space: normal; text-align: center; }
   .hero-bottom { flex-direction: column; align-items: center; gap: 12px; }
   .hero-coords { font-size: 9px; }
-  .hero-btn { font-size: 9px; padding: 10px 20px; }
+  .hero-btn { font-size: 9px; }
 }
 
 /* ── UPCOMING ── */
 #upcoming {
   background: #000;
-  padding: 80px 40px;
+  padding: 120px 40px;
+  border-top: 1px solid #111;
 }
 .event-label {
-  color: #4B5F45;
-  font-size: 10px;
-  letter-spacing: 0.25em;
+  color: #9AA696;
+  font-size: 13px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin: 0 0 32px 0;
+  margin: 0 0 40px 0;
 }
 .event-main {
   display: flex;
@@ -215,14 +272,17 @@ nav {
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border: 1px solid #9AA696;
-  padding: 14px 32px;
-  text-decoration: none;
-  white-space: nowrap;
-  background: transparent;
-  transition: background 0.2s, color 0.2s;
 }
-.event-btn:hover { background: #9AA696; color: #000; }
+
+.join-submit {
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  align-self: flex-end;
+}
+@media (max-width: 640px) { .join-submit { align-self: flex-start; } }
 .cursor-ev {
   display: inline-block;
   width: 2px;
@@ -255,7 +315,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.70);
   z-index: 0;
 }
 #manifesto > * { position: relative; z-index: 1; }
@@ -290,8 +350,8 @@ nav {
 .manifesto-bottom { display: flex; justify-content: flex-end; }
 .manifesto-tag {
   color: #9AA696;
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 14px;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   margin: 0;
   opacity: 0;
@@ -307,6 +367,7 @@ nav {
 #how {
   background: #000;
   padding: 80px 40px;
+  border-top: 1px solid #111;
 }
 .how-label {
   color: #9AA696;
@@ -340,7 +401,10 @@ nav {
   letter-spacing: 0.04em;
   margin: 0 0 16px 0;
   line-height: 1.1;
+  min-height: 1.1em;
+  visibility: hidden;
 }
+#how-t1 { visibility: hidden; }
 .how-text {
   color: #9AA696;
   font-size: 0.9em;
@@ -358,15 +422,16 @@ nav {
 #behind {
   background: #000;
   padding: 80px 40px;
+  border-top: 1px solid #111;
 }
 .behind-title {
-  color: #4B5F45;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.9em;
-  font-weight: 700;
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0 0 48px 0;
+  letter-spacing: 0.2em;
+  margin: 0 0 40px 0;
 }
 .behind-photo-wrap {
   position: relative;
@@ -411,6 +476,56 @@ nav {
   #behind { padding: 60px 24px; }
 }
 
+/* ── MORE THAN ── */
+#morethan {
+  background: #000;
+  border-top: 1px solid #111;
+  display: flex;
+  align-items: stretch;
+  min-height: 60vh;
+}
+.morethan-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 80px 40px;
+}
+.morethan-title {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.5em, 5vw, 4.5em);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.morethan-line { display: block; }
+#mt-word {
+  display: inline-block;
+  color: #9AA696;
+}
+.morethan-right {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.morethan-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+@media (max-width: 768px) {
+  #morethan { flex-direction: column; min-height: auto; }
+  .morethan-left { padding: 60px 24px 40px 24px; }
+  .morethan-right { height: 240px; }
+}
+
 /* ── JOIN ── */
 #join {
   background: #000;
@@ -418,13 +533,13 @@ nav {
   border-top: 1px solid #111;
 }
 .join-title {
-  color: #4B5F45;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.9em;
-  font-weight: 700;
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0 0 48px 0;
+  letter-spacing: 0.2em;
+  margin: 0 0 40px 0;
 }
 .join-form {
   display: flex;
@@ -468,24 +583,11 @@ nav {
 }
 .join-field select option { background: #000; color: #9AA696; }
 .join-field textarea { resize: none; height: 80px; }
-.join-submit {
-  color: #9AA696;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: 1px solid #9AA696;
-  padding: 16px 40px;
-  background: transparent;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: background 0.2s, color 0.2s;
-}
-.join-submit:hover { background: #9AA696; color: #000; }
+
 @media (max-width: 640px) {
   #join { padding: 60px 24px; }
   .join-form { margin-left: 0; }
-  .join-submit { align-self: flex-start; }
+  .join-submit { align-self: flex-start; padding: 0; }
 }
 
 /* ── FOOTER ── */
@@ -497,13 +599,42 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
-.footer-logo {
+.footer-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+  opacity: 0.8;
+}
+.footer-social {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.footer-social a {
   color: #4B5F45;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.footer-social a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: #4B5F45;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.footer-social a:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
 }
 .footer-info {
   color: #4B5F45;
@@ -514,8 +645,9 @@ footer {
   line-height: 1.9;
 }
 @media (max-width: 640px) {
-  footer { padding: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  footer { padding: 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
   .footer-info { text-align: left; }
+  .footer-social { gap: 20px; }
 }
 </style>
 </head>
@@ -523,12 +655,13 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><img src="img/logo.png" alt="NSCC"></a>
+  <a class="nav-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#behind">Behind</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="#upcoming">Rides</a></li>
-    <li><a href="#join">Join</a></li>
+    <li><a href="#how">How</a></li>
+    <li><a href="#behind">Behind</a></li>
+    <li><a href="join.html">Join</a></li>
   </ul>
 </nav>
 
@@ -544,7 +677,7 @@ footer {
   </div>
   <div class="hero-bottom">
     <p class="hero-coords">46°22'N · 09°28'E · Valtellina, IT</p>
-    <a class="hero-btn" href="#join">Join us</a>
+    <a class="hero-btn" href="join.html">Join us</a>
   </div>
 </section>
 
@@ -572,9 +705,7 @@ footer {
   <div class="manifesto-center">
     <p class="manifesto-title" id="manifesto-title"></p>
   </div>
-  <div class="manifesto-bottom">
-    <p class="manifesto-tag" id="manifesto-tag">More than cycling.</p>
-  </div>
+  <div></div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -583,17 +714,17 @@ footer {
   <div class="how-grid">
     <div class="how-col">
       <p class="how-num">01</p>
-      <p class="how-title">Follow the rides</p>
+      <p class="how-title" id="how-t1">Follow the rides</p>
       <p class="how-text">We post upcoming rides here and on Instagram. No membership fees, no hierarchy.</p>
     </div>
     <div class="how-col">
       <p class="how-num">02</p>
-      <p class="how-title">Sign up</p>
+      <p class="how-title" id="how-t2">Sign up</p>
       <p class="how-text">Fill in the form. We'll reach out before the ride with all the details you need.</p>
     </div>
     <div class="how-col">
       <p class="how-num">03</p>
-      <p class="how-title">Ride with us</p>
+      <p class="how-title" id="how-t3">Ride with us</p>
       <p class="how-text">We meet, we ride. There's always an aperitivo after. Welcome to the club.</p>
     </div>
   </div>
@@ -607,48 +738,32 @@ footer {
     <div class="behind-names">
       <span class="behind-name">Enri</span>
       <div class="behind-line"></div>
-      <span class="behind-name">Mat</span>
+      <span class="behind-name">Matti</span>
     </div>
   </div>
   <p class="behind-tagline">Not pro cyclists. Just passionate.</p>
 </section>
 
-<!-- JOIN -->
-<section id="join">
-  <p class="join-title">Join us</p>
-  <form class="join-form" onsubmit="handleSubmit(event)">
-    <div class="join-field">
-      <label>Name</label>
-      <input type="text" placeholder="Your name" required>
-    </div>
-    <div class="join-field">
-      <label>Email</label>
-      <input type="email" placeholder="your@email.com" required>
-    </div>
-    <div class="join-field">
-      <label>Where are you from?</label>
-      <input type="text" placeholder="City, Country">
-    </div>
-    <div class="join-field">
-      <label>How do you ride?</label>
-      <select>
-        <option value="">Select level</option>
-        <option>Casual — just for fun</option>
-        <option>Amateur — a few rides a week</option>
-        <option>Trained — I take it seriously</option>
-      </select>
-    </div>
-    <div class="join-field">
-      <label>How did you find us?</label>
-      <input type="text" placeholder="Instagram, a friend, ...">
-    </div>
-    <button type="submit" class="join-submit">Send →</button>
-  </form>
+<!-- MORE THAN -->
+<section id="morethan">
+  <div class="morethan-right">
+    <img class="morethan-img" src="img/stelvio.jpg" alt="Stelvio">
+  </div>
+  <div class="morethan-left">
+    <p class="morethan-title">
+      <span class="morethan-line">More than</span>
+      <span class="morethan-line"><span id="mt-word">cycling</span></span>
+    </p>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">NSCC</span>
+  <a class="footer-logo" href="#"><img src="img/logo.png" alt="NSCC"></a>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/northsidecc_/" target="_blank">Instagram</a>
+    <a href="https://www.strava.com/clubs/northsidecc" target="_blank">Strava</a>
+  </div>
   <div class="footer-info">
     <div>Northside Cycling Club</div>
     <div>Valtellina, IT · Est. 2026</div>
@@ -734,8 +849,8 @@ function scramble(el, from, to, done) {
   for (var i = 0; i < len; i++) {
     queue.push({
       f: from[i] || '', t: to[i] || '',
-      start: Math.floor(Math.random() * 8),
-      end: Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8),
+      start: Math.floor(Math.random() * 30),
+      end: Math.floor(Math.random() * 30) + Math.floor(Math.random() * 30),
       char: ''
     });
   }
@@ -778,7 +893,6 @@ function typeOnce(el, text, speed, cb) {
 // ── MANIFESTO ──
 var manifestoLines = ['Some come for the ride.', 'Most stay for the people.'];
 var manifestoEl = document.getElementById('manifesto-title');
-var manifestoTag = document.getElementById('manifesto-tag');
 var manifestoWords = [];
 manifestoLines.forEach(function(line, li) {
   line.split(' ').forEach(function(word) {
@@ -829,7 +943,53 @@ window.addEventListener('load', function() {
     manifestoWords.forEach(function(word, i) {
       setTimeout(function() { word.classList.add('visible'); }, i * 200);
     });
-    setTimeout(function() { manifestoTag.classList.add('visible'); }, manifestoWords.length * 200 + 400);
+  }
+
+  // How it works animation
+  var howTriggered = false;
+  function startHow() {
+    if (howTriggered) return;
+    howTriggered = true;
+    var ht1 = document.getElementById('how-t1');
+    var ht2 = document.getElementById('how-t2');
+    var ht3 = document.getElementById('how-t3');
+    if (!ht1) return;
+    ht1.style.visibility = 'visible';
+    scramble(ht1, '', 'Follow the rides', function() {
+      scrambleLoop2(ht1, 'Follow the rides', 7000, 0);
+      setTimeout(function() {
+        if (!ht2) return;
+        ht2.style.visibility = 'visible';
+        scramble(ht2, '', 'Sign up', function() {
+          scrambleLoop2(ht2, 'Sign up', 7000, 0);
+          setTimeout(function() {
+            if (!ht3) return;
+            ht3.style.visibility = 'visible';
+            scramble(ht3, '', 'Ride with us', function() {
+              scrambleLoop2(ht3, 'Ride with us', 7000, 0);
+            });
+          }, 400);
+        });
+      }, 400);
+    });
+  }
+
+  // More than animation — cycling / community / family loop
+  var mtTriggered = false;
+  function startMoreThan() {
+    if (mtTriggered) return;
+    mtTriggered = true;
+    var mtWord = document.getElementById('mt-word');
+    if (!mtWord) return;
+    var words = ['cycling', 'community', 'family'];
+    var idx = 0;
+    function next() {
+      idx = (idx + 1) % words.length;
+      scramble(mtWord, mtWord.innerText, words[idx], function() {
+        setTimeout(next, 2000);
+      });
+    }
+    setTimeout(next, 800);
   }
 
   // Scroll observer
@@ -843,6 +1003,16 @@ window.addEventListener('load', function() {
     if (manEl) {
       var r2 = manEl.getBoundingClientRect();
       if (r2.top < window.innerHeight * 0.5) startManifesto();
+    }
+    var howEl = document.getElementById('how-t1');
+    if (howEl) {
+      var r3 = howEl.getBoundingClientRect();
+      if (r3.top < window.innerHeight * 0.85) startHow();
+    }
+    var mtEl = document.getElementById('mt-word');
+    if (mtEl) {
+      var r4 = mtEl.getBoundingClientRect();
+      if (r4.top < window.innerHeight * 0.85) startMoreThan();
     }
   }
 
