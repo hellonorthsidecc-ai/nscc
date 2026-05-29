@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSCC — Northside Cycling Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #000; color: #9AA696; font-family: 'Space Mono', monospace; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+@media (max-width: 640px) {
+  nav { padding: 20px 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 9px; }
+}
+
+/* ── HERO ── */
+#hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 40px 32px 40px;
+  background-image: url('img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 0;
+}
+#hero > * { position: relative; z-index: 1; }
+.hero-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+}
+.hero-title {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.5em, 6vw, 5em);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-title span { display: block; }
+.hero-claim {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  min-height: 1.4em;
+}
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-coords {
+  color: #9AA696;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+}
+.hero-btn {
+  color: #9AA696;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid #9AA696;
+  padding: 12px 32px;
+  text-decoration: none;
+  background: transparent;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.hero-btn:hover { background: #9AA696; color: #000; }
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: #4B5F45;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@media (max-width: 768px) {
+  #hero { padding: 0 24px 24px 24px; }
+  .hero-title { font-size: clamp(2em, 8vw, 3em); }
+  .hero-claim { font-size: 9px; white-space: normal; text-align: center; }
+  .hero-bottom { flex-direction: column; align-items: center; gap: 12px; }
+  .hero-coords { font-size: 9px; }
+  .hero-btn { font-size: 9px; padding: 10px 20px; }
+}
+
+/* ── UPCOMING ── */
+#upcoming {
+  background: #000;
+  padding: 80px 40px;
+}
+.event-label {
+  color: #4B5F45;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin: 0 0 32px 0;
+}
+.event-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.event-number {
+  color: #4B5F45;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+  line-height: 1;
+  min-height: 1.2em;
+}
+.event-title {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2em, 4vw, 3.5em);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+.event-title span { display: block; min-height: 1.1em; }
+.event-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.event-meta {
+  color: #9AA696;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.9;
+}
+.event-btn {
+  color: #9AA696;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid #9AA696;
+  padding: 14px 32px;
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.event-btn:hover { background: #9AA696; color: #000; }
+.cursor-ev {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background: #4B5F45;
+  margin-left: 1px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+@media (max-width: 640px) {
+  #upcoming { padding: 60px 24px; }
+  .event-main { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .event-right { align-items: flex-start; text-align: left; }
+}
+
+/* ── MANIFESTO ── */
+#manifesto {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 40px 60px 40px;
+  background-image: url('img/manifesto.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+#manifesto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+#manifesto > * { position: relative; z-index: 1; }
+.manifesto-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.manifesto-title {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.8em, 3.5vw, 3em);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+}
+.manifesto-title .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+  margin-right: 0.25em;
+}
+.manifesto-title .word.visible { opacity: 1; transform: translateY(0); }
+.manifesto-bottom { display: flex; justify-content: flex-end; }
+.manifesto-tag {
+  color: #9AA696;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.manifesto-tag.visible { opacity: 1; }
+@media (max-width: 640px) {
+  #manifesto { padding: 24px 24px 40px 24px; min-height: calc(100vh - 60px); }
+  .manifesto-title { font-size: clamp(1.4em, 5vw, 2em); }
+}
+
+/* ── HOW IT WORKS ── */
+#how {
+  background: #000;
+  padding: 80px 40px 80px 0;
+}
+.how-label {
+  color: #9AA696;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 40px 0;
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #222;
+}
+.how-col {
+  background: #000;
+  padding: 32px 24px;
+}
+.how-num {
+  color: #4B5F45;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  margin: 0 0 20px 0;
+}
+.how-title {
+  color: #4B5F45;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+.how-text {
+  color: #9AA696;
+  font-size: 0.9em;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  #how { padding: 60px 20px 60px 0; }
+  .how-grid { grid-template-columns: 1fr; }
+}
+
+/* ── BEHIND ── */
+#behind {
+  background: #000;
+  padding: 80px 40px;
+}
+.behind-title {
+  color: #4B5F45;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 48px 0;
+}
+.behind-photo-wrap {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.behind-photo {
+  width: 100%;
+  display: block;
+  filter: grayscale(100%);
+}
+.behind-names {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #1a2a18;
+  border-bottom: 1px solid #1a2a18;
+  margin-top: 0;
+}
+.behind-name {
+  color: #4B5F45;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.behind-line {
+  flex: 1;
+  height: 1px;
+  background: #1a2a18;
+  margin: 0 16px;
+}
+.behind-tagline {
+  color: #9AA696;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 48px;
+}
+@media (max-width: 640px) {
+  #behind { padding: 60px 24px; }
+}
+
+/* ── JOIN ── */
+#join {
+  background: #000;
+  padding: 80px 40px;
+  border-top: 1px solid #111;
+}
+.join-title {
+  color: #4B5F45;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 48px 0;
+}
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 560px;
+  margin-left: auto;
+}
+.join-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.join-field label {
+  color: #4B5F45;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.join-field input,
+.join-field select,
+.join-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #1a2a18;
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 10px 0;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.join-field input:focus,
+.join-field select:focus,
+.join-field textarea:focus {
+  border-bottom-color: #9AA696;
+}
+.join-field select option { background: #000; color: #9AA696; }
+.join-field textarea { resize: none; height: 80px; }
+.join-submit {
+  color: #9AA696;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid #9AA696;
+  padding: 16px 40px;
+  background: transparent;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background 0.2s, color 0.2s;
+}
+.join-submit:hover { background: #9AA696; color: #000; }
+@media (max-width: 640px) {
+  #join { padding: 60px 24px; }
+  .join-form { margin-left: 0; }
+  .join-submit { align-self: flex-start; }
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #000;
+  border-top: 1px solid #111;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  color: #4B5F45;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.footer-info {
+  color: #4B5F45;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 1.9;
+}
+@media (max-width: 640px) {
+  footer { padding: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .footer-info { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><img src="img/logo.png" alt="NSCC"></a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#behind">Behind</a></li>
+    <li><a href="#upcoming">Rides</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div></div>
+  <div class="hero-center">
+    <p class="hero-title">
+      <span id="sc-l1">Northside</span>
+      <span id="sc-l2">Cycling Club</span>
+    </p>
+    <p class="hero-claim" id="typing-claim"><span class="cursor"></span></p>
+  </div>
+  <div class="hero-bottom">
+    <p class="hero-coords">46°22'N · 09°28'E · Valtellina, IT</p>
+    <a class="hero-btn" href="#join">Join us</a>
+  </div>
+</section>
+
+<!-- UPCOMING -->
+<section id="upcoming">
+  <p class="event-label">Upcoming</p>
+  <div class="event-main">
+    <div>
+      <p class="event-number" id="ev-num">NSCC #001</p>
+      <p class="event-title">
+        <span id="ev-t1"></span>
+        <span id="ev-t2"></span>
+      </p>
+    </div>
+    <div class="event-right">
+      <p class="event-meta">Valtellina, IT<br>Summer 2026</p>
+      <a class="event-btn" href="https://strava.com" target="_blank">Sign up on Strava →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div></div>
+  <div class="manifesto-center">
+    <p class="manifesto-title" id="manifesto-title"></p>
+  </div>
+  <div class="manifesto-bottom">
+    <p class="manifesto-tag" id="manifesto-tag">More than cycling.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <p class="how-label">How it works</p>
+  <div class="how-grid">
+    <div class="how-col">
+      <p class="how-num">01</p>
+      <p class="how-title">Follow the rides</p>
+      <p class="how-text">We post upcoming rides here and on Instagram. No membership fees, no hierarchy.</p>
+    </div>
+    <div class="how-col">
+      <p class="how-num">02</p>
+      <p class="how-title">Sign up</p>
+      <p class="how-text">Fill in the form. We'll reach out before the ride with all the details you need.</p>
+    </div>
+    <div class="how-col">
+      <p class="how-num">03</p>
+      <p class="how-title">Ride with us</p>
+      <p class="how-text">We meet, we ride. There's always an aperitivo after. Welcome to the club.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BEHIND -->
+<section id="behind">
+  <p class="behind-title">Behind NSCC</p>
+  <div class="behind-photo-wrap">
+    <img class="behind-photo" src="img/behind.jpg" alt="Enri and Mat, founders of NSCC">
+    <div class="behind-names">
+      <span class="behind-name">Enri</span>
+      <div class="behind-line"></div>
+      <span class="behind-name">Mat</span>
+    </div>
+  </div>
+  <p class="behind-tagline">Not pro cyclists. Just passionate.</p>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <p class="join-title">Join us</p>
+  <form class="join-form" onsubmit="handleSubmit(event)">
+    <div class="join-field">
+      <label>Name</label>
+      <input type="text" placeholder="Your name" required>
+    </div>
+    <div class="join-field">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com" required>
+    </div>
+    <div class="join-field">
+      <label>Where are you from?</label>
+      <input type="text" placeholder="City, Country">
+    </div>
+    <div class="join-field">
+      <label>How do you ride?</label>
+      <select>
+        <option value="">Select level</option>
+        <option>Casual — just for fun</option>
+        <option>Amateur — a few rides a week</option>
+        <option>Trained — I take it seriously</option>
+      </select>
+    </div>
+    <div class="join-field">
+      <label>How did you find us?</label>
+      <input type="text" placeholder="Instagram, a friend, ...">
+    </div>
+    <button type="submit" class="join-submit">Send →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">NSCC</span>
+  <div class="footer-info">
+    <div>Northside Cycling Club</div>
+    <div>Valtellina, IT · Est. 2026</div>
+  </div>
+</footer>
+
+<script>
+// ── SCRAMBLE ENGINE ──
+var CHARS = '!<>_/[]=+*?#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.update = this.update.bind(this);
+    this.original = el.innerText;
+  }
+  setText(t) {
+    const plain = this.original;
+    const len = Math.max(plain.length, t.length);
+    const p = new Promise(r => this.resolve = r);
+    this.queue = [];
+    for (let i = 0; i < len; i++) {
+      const from = plain[i] || '';
+      const to = t[i] || '';
+      const start = Math.floor(Math.random() * 15);
+      const end = start + Math.floor(Math.random() * 15);
+      this.queue.push({ from, to, start, end });
+    }
+    cancelAnimationFrame(this.fr);
+    this.frame = 0;
+    this.update();
+    return p;
+  }
+  update() {
+    let out = '', done = 0;
+    for (let i = 0; i < this.queue.length; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) { done++; out += to; }
+      else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          this.queue[i].char = char;
+        }
+        out += '<span style="opacity:0.25;color:#4B5F45">' + char + '</span>';
+      } else { out += from; }
+    }
+    this.el.innerHTML = out;
+    if (done === this.queue.length) {
+      this.el.innerText = this.original;
+      this.resolve();
+    } else {
+      this.fr = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+}
+
+function scrambleLoop(el, text, pause, delay) {
+  const fx = new TextScramble(el);
+  const go = () => fx.setText(text).then(() => setTimeout(go, pause));
+  setTimeout(go, delay || 0);
+}
+
+function typeLoop(el, texts, speed, pause) {
+  let ti = 0;
+  function typeText(text, cb) {
+    let i = 0;
+    el.innerHTML = '<span class="cursor"></span>';
+    const iv = setInterval(() => {
+      el.innerHTML = text.slice(0, i) + '<span class="cursor"></span>';
+      i++;
+      if (i > text.length) { clearInterval(iv); setTimeout(cb, pause); }
+    }, speed);
+  }
+  function next() { typeText(texts[ti % texts.length], () => { ti++; next(); }); }
+  setTimeout(next, 1500);
+}
+
+// ── EVENT SCRAMBLE ──
+function scramble(el, from, to, done) {
+  var len = Math.max(from.length, to.length);
+  var queue = [];
+  for (var i = 0; i < len; i++) {
+    queue.push({
+      f: from[i] || '', t: to[i] || '',
+      start: Math.floor(Math.random() * 8),
+      end: Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8),
+      char: ''
+    });
+  }
+  var frame = 0;
+  function tick() {
+    var out = '', finished = 0;
+    for (var j = 0; j < queue.length; j++) {
+      var q = queue[j];
+      if (frame >= q.end) { finished++; out += q.t; }
+      else if (frame >= q.start) {
+        if (!q.char || Math.random() < 0.28) q.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        out += '<span style="display:inline;opacity:0.25;color:#4B5F45">' + q.char + '</span>';
+      } else { out += q.f; }
+    }
+    el.innerHTML = out;
+    frame++;
+    if (finished < queue.length) requestAnimationFrame(tick);
+    else { el.innerText = to; if (done) done(); }
+  }
+  tick();
+}
+
+function scrambleLoop2(el, text, pause, delay) {
+  setTimeout(function() {
+    function go() { scramble(el, el.innerText || text, text, function() { setTimeout(go, pause); }); }
+    go();
+  }, delay || 0);
+}
+
+function typeOnce(el, text, speed, cb) {
+  var i = 0;
+  el.innerHTML = '<span class="cursor-ev"></span>';
+  var iv = setInterval(function() {
+    el.innerHTML = text.slice(0, i) + '<span class="cursor-ev"></span>';
+    i++;
+    if (i > text.length) { clearInterval(iv); setTimeout(function() { el.innerText = text; if (cb) cb(); }, 500); }
+  }, speed);
+}
+
+// ── MANIFESTO ──
+var manifestoLines = ['Some come for the ride.', 'Most stay for the people.'];
+var manifestoEl = document.getElementById('manifesto-title');
+var manifestoTag = document.getElementById('manifesto-tag');
+var manifestoWords = [];
+manifestoLines.forEach(function(line, li) {
+  line.split(' ').forEach(function(word) {
+    var span = document.createElement('span');
+    span.className = 'word';
+    span.innerText = word;
+    manifestoEl.appendChild(span);
+    manifestoWords.push(span);
+  });
+  if (li < manifestoLines.length - 1) manifestoEl.appendChild(document.createElement('br'));
+});
+
+// ── INIT ON LOAD ──
+window.addEventListener('load', function() {
+  // Hero scramble
+  var l1 = document.getElementById('sc-l1');
+  var l2 = document.getElementById('sc-l2');
+  var claim = document.getElementById('typing-claim');
+  if (l1) scrambleLoop(l1, 'Northside', 7000, 0);
+  if (l2) scrambleLoop(l2, 'Cycling Club', 7000, 200);
+  if (claim) typeLoop(claim, [
+    'Rides · Mountains · Culture · Mostly people',
+    'A cycling club from the north of Italy.',
+    'Valtellina, IT · Est. 2026'
+  ], 40, 1500);
+
+  // Event animation
+  var evTriggered = false;
+  function startEvent() {
+    if (evTriggered) return;
+    evTriggered = true;
+    var num = document.getElementById('ev-num');
+    var t1 = document.getElementById('ev-t1');
+    var t2 = document.getElementById('ev-t2');
+    typeOnce(num, 'NSCC #001', 60, function() {
+      scramble(t1, '', 'Opening', function() { scrambleLoop2(t1, 'Opening', 7000, 0); });
+      setTimeout(function() {
+        scramble(t2, '', 'Ride', function() { scrambleLoop2(t2, 'Ride', 7000, 0); });
+      }, 200);
+    });
+  }
+
+  // Manifesto animation
+  var manifTriggered = false;
+  function startManifesto() {
+    if (manifTriggered) return;
+    manifTriggered = true;
+    manifestoWords.forEach(function(word, i) {
+      setTimeout(function() { word.classList.add('visible'); }, i * 200);
+    });
+    setTimeout(function() { manifestoTag.classList.add('visible'); }, manifestoWords.length * 200 + 400);
+  }
+
+  // Scroll observer
+  function checkSections() {
+    var evEl = document.getElementById('ev-num');
+    var manEl = document.getElementById('manifesto-section') || document.getElementById('manifesto');
+    if (evEl) {
+      var r = evEl.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) startEvent();
+    }
+    if (manEl) {
+      var r2 = manEl.getBoundingClientRect();
+      if (r2.top < window.innerHeight * 0.9) startManifesto();
+    }
+  }
+
+  window.addEventListener('scroll', checkSections, { passive: true });
+  setTimeout(checkSections, 500);
+});
+
+// ── FORM ──
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('.join-submit');
+  btn.innerText = 'Sent ✓';
+  btn.style.borderColor = '#4B5F45';
+  btn.style.color = '#4B5F45';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
