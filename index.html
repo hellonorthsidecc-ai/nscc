@@ -51,6 +51,45 @@ nav.nav-hidden { transform: translateY(-100%); }
 .nav-toggle span:nth-child(2) { top: 11px; }
 nav.menu-open .nav-toggle span:nth-child(1) { top: 7px; transform: rotate(45deg); }
 nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg); }
+/* fullscreen mobile menu overlay (separate from nav so transform doesn't trap it) */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: #000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu a {
+  color: #9AA696;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 11vw, 52px);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.9;
+}
+.mobile-menu a:active { opacity: 1; color: #4B5F45; }
+.mobile-menu .mm-coords {
+  position: absolute;
+  bottom: 40px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4B5F45;
+  font-weight: 400;
+  opacity: 0.8;
+}
 .nav-logo {
   text-decoration: none;
   display: flex;
@@ -82,21 +121,8 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   .nav-logo { position: relative; z-index: 101; }
   .nav-logo img { height: 24px; }
   .nav-toggle { display: block; }
-  .nav-links {
-    position: fixed;
-    inset: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    background: rgba(0,0,0,0.97);
-    z-index: 90;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-  }
-  nav.menu-open .nav-links { opacity: 1; visibility: visible; }
-  .nav-links a { font-size: 17px; letter-spacing: 0.3em; opacity: 0.85; }
+  .nav-links { display: none; }
+  .mobile-menu { display: flex; }
 }
 
 /* ── HERO ── */
@@ -716,6 +742,16 @@ footer {
   </button>
 </nav>
 
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="#upcoming">Rides</a>
+  <a href="#how">How</a>
+  <a href="#behind">Behind</a>
+  <a href="join.html">Join</a>
+  <span class="mm-coords">46°22'N · 09°28'E · Valtellina, IT</span>
+</div>
+
 <!-- HERO -->
 <section id="hero">
   <div></div>
@@ -1096,9 +1132,11 @@ window.addEventListener('load', function() {
 (function () {
   var nav = document.querySelector('nav');
   var toggle = nav && nav.querySelector('.nav-toggle');
-  if (!nav || !toggle) return;
+  var menu = document.getElementById('mobile-menu');
+  if (!nav || !toggle || !menu) return;
   function setOpen(open) {
     nav.classList.toggle('menu-open', open);
+    menu.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) nav.classList.remove('nav-hidden');
@@ -1106,7 +1144,7 @@ window.addEventListener('load', function() {
   toggle.addEventListener('click', function () {
     setOpen(!nav.classList.contains('menu-open'));
   });
-  var links = nav.querySelectorAll('.nav-links a');
+  var links = menu.querySelectorAll('a');
   for (var i = 0; i < links.length; i++) {
     links[i].addEventListener('click', function () { setOpen(false); });
   }
