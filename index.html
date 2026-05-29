@@ -22,7 +22,35 @@ nav {
   align-items: center;
   padding: 24px 40px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
 }
+nav.nav-hidden { transform: translateY(-100%); }
+/* mobile menu toggle (two bars, hidden on desktop) */
+.nav-toggle {
+  display: none;
+  position: relative;
+  width: 26px;
+  height: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+}
+.nav-toggle span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: #9AA696;
+  transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+}
+.nav-toggle span:nth-child(1) { top: 3px; }
+.nav-toggle span:nth-child(2) { top: 11px; }
+nav.menu-open .nav-toggle span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg); }
 .nav-logo {
   text-decoration: none;
   display: flex;
@@ -51,9 +79,24 @@ nav {
 .nav-links a:hover { opacity: 1; }
 @media (max-width: 640px) {
   nav { padding: 18px 20px; }
-  .nav-logo img { height: 28px; }
-  .nav-links { gap: 14px; }
-  .nav-links a { font-size: 9px; letter-spacing: 0.12em; }
+  .nav-logo { position: relative; z-index: 101; }
+  .nav-logo img { height: 24px; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: rgba(0,0,0,0.97);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  nav.menu-open .nav-links { opacity: 1; visibility: visible; }
+  .nav-links a { font-size: 17px; letter-spacing: 0.3em; opacity: 0.85; }
 }
 
 /* ── HERO ── */
@@ -649,9 +692,10 @@ footer {
   line-height: 1.9;
 }
 @media (max-width: 640px) {
-  footer { padding: 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
-  .footer-info { text-align: left; }
-  .footer-social { gap: 20px; }
+  footer { padding: 28px 24px; flex-direction: column; gap: 22px; align-items: center; text-align: center; }
+  .footer-logo img { height: 24px; }
+  .footer-info { text-align: center; }
+  .footer-social { gap: 24px; }
 }
 </style>
 </head>
@@ -667,6 +711,9 @@ footer {
     <li><a href="#behind">Behind</a></li>
     <li><a href="join.html">Join</a></li>
   </ul>
+  <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1020,6 +1067,50 @@ window.addEventListener('load', function() {
   window.addEventListener('scroll', checkSections, { passive: true });
   setTimeout(checkSections, 500);
 });
+
+// ── HIDE NAV ON SCROLL DOWN, SHOW ON SCROLL UP ──
+(function () {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var last = window.pageYOffset || 0;
+  var ticking = false;
+  function update() {
+    var y = window.pageYOffset || 0;
+    if (nav.classList.contains('menu-open')) { ticking = false; return; }
+    if (y <= 80) {
+      nav.classList.remove('nav-hidden');        // always show near the top
+    } else if (y > last + 6) {
+      nav.classList.add('nav-hidden');            // scrolling down -> hide
+    } else if (y < last - 6) {
+      nav.classList.remove('nav-hidden');         // scrolling up -> show
+    }
+    last = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+
+// ── MOBILE MENU TOGGLE ──
+(function () {
+  var nav = document.querySelector('nav');
+  var toggle = nav && nav.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+  function setOpen(open) {
+    nav.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) nav.classList.remove('nav-hidden');
+  }
+  toggle.addEventListener('click', function () {
+    setOpen(!nav.classList.contains('menu-open'));
+  });
+  var links = nav.querySelectorAll('.nav-links a');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function () { setOpen(false); });
+  }
+})();
 
 // ── FORM ──
 function handleSubmit(e) {
