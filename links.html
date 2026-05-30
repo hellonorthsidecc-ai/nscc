@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+  NSCC — link in bio
+  Come usarla: rinomina questo file in "links.html", mettilo nella cartella nscc
+  (accanto a index.html), push su GitHub Pages, e nella bio Instagram metti:
+  hellonorthsidecc-ai.github.io/nscc/links.html
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSCC — Links</title>
+<meta name="description" content="Northside Cycling Club — website & Strava.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;
+    --text:#9AA696;
+    --accent:#4B5F45;
+    --bright:#ECEEE9;
+    --line:#222;
+    --muted:#6E7A68;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Mono',monospace;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:48px 24px;
+    position:relative;
+    overflow-x:hidden;
+  }
+  /* faint grain for atmosphere */
+  body::after{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{width:100%;max-width:400px;text-align:center;z-index:1}
+
+  .tick{display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.25em;color:var(--muted);margin-bottom:48px}
+  .tick-logo{height:26px;width:auto;display:block;opacity:.95}
+
+  .title{margin-top:4px}
+  .title .line{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:54px;line-height:.98;letter-spacing:.05em;color:var(--bright);
+    text-transform:uppercase;min-height:1em;
+  }
+  .title .dud{color:var(--accent)}
+  .claim{font-size:12px;letter-spacing:.15em;color:var(--text);margin-top:22px;line-height:1.7;text-transform:uppercase}
+
+  .links{margin-top:44px;display:flex;flex-direction:column;gap:14px}
+  .btn{
+    display:flex;align-items:center;justify-content:space-between;
+    text-decoration:none;
+    border:1px solid var(--line);
+    color:var(--bright);
+    padding:20px 22px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:21px;letter-spacing:.14em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease,border-color .25s ease,transform .15s ease;
+  }
+  .btn span.meta{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);font-weight:400;transition:color .25s ease}
+  .btn .arrow{font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);transition:color .25s ease}
+  .btn:hover{background:var(--accent);color:#0a0a0a;border-color:var(--accent);transform:translateY(-2px)}
+  .btn:hover span.meta,.btn:hover .arrow{color:#0a0a0a}
+  .btn .label{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+
+  footer{margin-top:54px;font-size:10px;letter-spacing:.22em;color:var(--muted);line-height:2}
+
+  /* staggered entrance */
+  .anim{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.30s}
+  .d4{animation-delay:.42s}.d5{animation-delay:.54s}.d6{animation-delay:.66s}
+
+  @media (max-width:380px){ .title .line{font-size:44px} .btn{font-size:19px;padding:18px 18px} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="tick anim d1"><img class="tick-logo" src="img/logo.png" alt="NSCC"><span>EST. 2026</span></div>
+
+    <h1 class="title anim d2">
+      <div class="line" id="l1">NORTHSIDE</div>
+      <div class="line" id="l2">CYCLING CLUB</div>
+    </h1>
+    <div class="claim anim d3">Some come for the ride.<br>Most stay for the people.</div>
+
+    <nav class="links">
+      <a class="btn anim d4" href="https://hellonorthsidecc-ai.github.io/nscc/" target="_blank" rel="noopener">
+        <span class="label">Website<span class="meta">NORTHSIDECC.COM</span></span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="btn anim d5" href="https://www.strava.com/clubs/northsidecc" target="_blank" rel="noopener">
+        <span class="label">Strava Club<span class="meta">JOIN THE RIDES</span></span>
+        <span class="arrow">↗</span>
+      </a>
+    </nav>
+
+    <footer class="anim d6">VALTELLINA, IT · 46.17° N 9.87° E</footer>
+  </div>
+<script>
+  const chars = '!<>-_\\/[]{}=+*^?#________';
+  class Scramble {
+    constructor(el){ this.el = el; this.update = this.update.bind(this); }
+    setText(newText){
+      const old = this.el.dataset.text || '';
+      const len = Math.max(old.length, newText.length);
+      const p = new Promise(r => this.resolve = r);
+      this.queue = [];
+      for(let i=0;i<len;i++){
+        const from = old[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random()*40);
+        const end = start + Math.floor(Math.random()*40);
+        this.queue.push({from,to,start,end});
+      }
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0; this.el.dataset.text = newText; this.update();
+      return p;
+    }
+    update(){
+      let out = '', done = 0;
+      for(let i=0;i<this.queue.length;i++){
+        let {from,to,start,end,char} = this.queue[i];
+        if(this.frame >= end){ done++; out += to; }
+        else if(this.frame >= start){
+          if(!char || Math.random() < 0.28){ char = chars[Math.floor(Math.random()*chars.length)]; this.queue[i].char = char; }
+          out += '<span class="dud">' + char + '</span>';
+        } else { out += from; }
+      }
+      this.el.innerHTML = out;
+      if(done === this.queue.length){ this.resolve && this.resolve(); }
+      else { this.frameRequest = requestAnimationFrame(this.update); this.frame++; }
+    }
+  }
+  const s1 = new Scramble(document.getElementById('l1'));
+  const s2 = new Scramble(document.getElementById('l2'));
+  function run(){ s1.setText('NORTHSIDE'); s2.setText('CYCLING CLUB'); }
+  run();
+  setInterval(run, 7000);
+</script>
+</body>
+</html>
