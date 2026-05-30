@@ -148,92 +148,52 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 /* ── JOIN PAGE ── */
 .join-page {
   flex: 1;
-  padding: 140px 40px 80px 40px;
   display: flex;
-  gap: 80px;
-  align-items: flex-start;
+  flex-direction: column;
+  padding: 120px 40px 60px 40px;
 }
-.join-page-left {
-  flex: 1;
+.join-head {
+  flex-shrink: 0;
 }
-.join-page-title {
+.join-label {
   color: #9AA696;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(3em, 6vw, 6em);
-  font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  letter-spacing: 0.2em;
   margin: 0 0 24px 0;
 }
-.join-page-sub {
+.join-sub {
   color: #4B5F45;
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   line-height: 1.9;
   max-width: 320px;
+  margin: 0;
 }
-.join-page-right {
+.join-center {
   flex: 1;
-}
-
-/* ── FORM ── */
-.join-form {
   display: flex;
-  flex-direction: column;
-  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
 }
-.join-field {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.join-field label {
-  color: #4B5F45;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-.join-field input,
-.join-field textarea {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #1a2a18;
+.join-email {
   color: #9AA696;
   font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 10px 0;
-  outline: none;
-  width: 100%;
-  transition: border-color 0.2s;
-}
-.join-field input:focus,
-.join-field textarea:focus {
-  border-bottom-color: #9AA696;
-}
-.join-field textarea {
-  resize: none;
-  height: 100px;
-}
-
-/* ── CTA ── */
-.join-submit {
-  color: #9AA696;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
+  font-size: clamp(0.8em, 3vw, 1.5em);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  align-self: flex-start;
+  text-decoration: none;
   position: relative;
   display: inline-block;
-  padding-bottom: 3px;
+  padding-bottom: 5px;
+  text-align: center;
+  word-break: break-word;
 }
-.join-submit::after {
+.join-email::after {
   content: '';
   position: absolute;
   left: 0; bottom: 0;
@@ -241,9 +201,9 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   background: currentColor;
   transform: scaleX(1);
   transform-origin: left;
-  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
 }
-.join-submit:hover::after {
+.join-email:hover::after {
   transform: scaleX(0);
   transform-origin: right;
 }
@@ -332,8 +292,8 @@ footer {
 }
 .footer-links a:hover { color: #9AA696; }
 @media (max-width: 768px) {
-  .join-page { flex-direction: column; padding: 120px 24px 60px 24px; gap: 48px; }
-  .join-page-title { font-size: clamp(2.5em, 8vw, 4em); }
+  .join-page { padding: 100px 24px 56px 24px; }
+  .join-center { padding: 56px 0; }
 }
 @media (max-width: 640px) {
   footer { padding: 28px 24px; }
@@ -375,30 +335,12 @@ footer {
 
 <!-- JOIN PAGE -->
 <main class="join-page">
-  <div class="join-page-left">
-    <p class="join-page-title">Join us</p>
-    <p class="join-page-sub">No membership fees.<br>No hierarchy.<br>Just people who love rides and community.</p>
+  <div class="join-head">
+    <p class="join-label">Join us</p>
+    <p class="join-sub">No membership fees.<br>No hierarchy.<br>Just people who love rides and community.</p>
   </div>
-  <div class="join-page-right">
-    <form class="join-form" onsubmit="handleSubmit(event)">
-      <div class="join-field">
-        <label>Name</label>
-        <input type="text" required>
-      </div>
-      <div class="join-field">
-        <label>Email</label>
-        <input type="email" required>
-      </div>
-      <div class="join-field">
-        <label>How did you find us?</label>
-        <input type="text">
-      </div>
-      <div class="join-field">
-        <label>Tell us</label>
-        <textarea></textarea>
-      </div>
-      <button type="submit" class="join-submit">Send →</button>
-    </form>
+  <div class="join-center">
+    <a class="join-email" href="mailto:hello.northsidecc@gmail.com">hello.northsidecc@gmail.com</a>
   </div>
 </main>
 
@@ -470,15 +412,6 @@ footer {
     links[i].addEventListener('click', function () { setOpen(false); });
   }
 })();
-
-// ── FORM ──
-function handleSubmit(e) {
-  e.preventDefault();
-  var btn = e.target.querySelector('.join-submit');
-  btn.innerText = 'Sent ✓';
-  btn.style.color = '#4B5F45';
-  btn.disabled = true;
-}
 </script>
 </body>
 </html>
