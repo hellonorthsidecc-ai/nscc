@@ -200,7 +200,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 #hero {
   width: 100%;
   min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--app-height, 100svh);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -461,7 +461,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 #manifesto {
   width: 100%;
   min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--app-height, 100svh);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -609,7 +609,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 @media (max-width: 640px) {
   #how { min-height: 100svh; padding: 96px 24px 40px; }
   .how-grid { grid-template-columns: 1fr; }
-  .how-col { padding: 32px 0; background: var(--bg); }
+  .how-col { padding: 32px 0; background: transparent; }
   .how-grid { background: transparent; gap: 1px; }
   .how-col + .how-col { border-top: 1px solid var(--line); }
 }
@@ -695,8 +695,8 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 .mt-bg img {
   width: min(170%, 1750px);
   height: auto;
-  filter: blur(9px);
-  opacity: 0.15;
+  filter: blur(6px);
+  opacity: 0.26;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -738,7 +738,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 @media (max-width: 768px) {
   #morethan { min-height: 70vh; padding: 80px 16px; }
-  .mt-bg img { width: 96%; max-width: 96vw; filter: blur(8px); }
+  .mt-bg img { width: 110%; max-width: 110vw; filter: blur(6px); opacity: 0.34; }
   .morethan-title { font-size: 7.4vw; letter-spacing: 0.03em; }
 }
 
@@ -1377,6 +1377,18 @@ function handleSubmit(e) {
     if(!raf) raf=requestAnimationFrame(loop);
   },{passive:true});
 })();
+</script>
+<script>
+  /* Stabilizza l'altezza delle sezioni a tutto schermo nel browser in-app (es. Instagram):
+     fissa --app-height all'apertura e la aggiorna solo a rotazione del telefono, NON durante lo scroll. */
+  (function(){
+    var w = window.innerWidth;
+    function setH(){ document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px'); }
+    setH();
+    window.addEventListener('resize', function(){
+      if (window.innerWidth !== w){ w = window.innerWidth; setH(); }
+    });
+  })();
 </script>
 </body>
 </html>
