@@ -134,6 +134,17 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   border-top: 1px solid #111; padding: 12px 0;
 }
 .pd-soon { color: #4B5F45; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.pd-colours { margin-bottom: 34px; }
+.pd-col-label { color: #4B5F45; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 14px; }
+.pd-swatches { display: flex; gap: 14px; align-items: center; }
+.pd-swatch {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid #1a2a18; cursor: pointer; padding: 0;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.pd-swatch:hover { border-color: #4B5F45; }
+.pd-swatch.active { border-color: #9AA696; box-shadow: 0 0 0 2px #000, 0 0 0 3px #9AA696; }
+.pd-col-name { color: #9AA696; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 4px; }
 @media (max-width: 768px) {
   .pd { padding: 100px 24px 70px 24px; }
   .pd-grid { flex-direction: column; gap: 36px; }
@@ -223,18 +234,26 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
   <a href="index.html#behind">Behind</a>
   <a href="merch.html" class="active">Merch</a>
   <a href="join.html">Join</a>
-  <span class="mm-coords">46°22'N · 09°28'E · Valtellina, IT</span>
+  <span class="mm-coords">46°10'N · 09°52'E · Valtellina, IT</span>
 </div>
 
 <!-- SHOP -->
 <main class="pd">
   <a class="pd-back" href="merch.html">← Merch</a>
   <div class="pd-grid">
-    <div class="pd-media"><img src="img/bidon.jpeg" alt="NSCC 750ml water bottle"></div>
+    <div class="pd-media"><img id="pd-img" src="img/bidon.jpeg" alt="NSCC 750ml water bottle"></div>
     <div class="pd-info">
       <p class="pd-num">03 · Drop 001</p>
       <h1 class="pd-name">Bidon</h1>
       <p class="pd-price">€8</p>
+      <div class="pd-colours">
+        <span class="pd-col-label">Colour</span>
+        <div class="pd-swatches">
+          <button class="pd-swatch active" data-img="img/bidon.jpeg" data-name="White" style="background:#f1f1ee" aria-label="White"></button>
+          <button class="pd-swatch" data-img="img/bidon-green.jpeg" data-name="Green" style="background:#8ea181" aria-label="Green"></button>
+          <span class="pd-col-name" id="pd-col-name">White</span>
+        </div>
+      </div>
       <p class="pd-desc">750 ml BPA-free bottle with a high-flow valve and the NSCC mark down the side. Squeeze, drink, repeat.</p>
       <ul class="pd-details">
         <li>750 ml</li>
@@ -312,6 +331,21 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
   var links = menu.querySelectorAll('a');
   for (var i = 0; i < links.length; i++) {
     links[i].addEventListener('click', function () { setOpen(false); });
+  }
+})();
+// ── COLOUR VARIANT ──
+(function () {
+  var img = document.getElementById('pd-img');
+  var nameEl = document.getElementById('pd-col-name');
+  var swatches = document.querySelectorAll('.pd-swatch');
+  if (!img || !swatches.length) return;
+  for (var i = 0; i < swatches.length; i++) {
+    swatches[i].addEventListener('click', function () {
+      img.src = this.getAttribute('data-img');
+      if (nameEl) nameEl.textContent = this.getAttribute('data-name');
+      for (var j = 0; j < swatches.length; j++) swatches[j].classList.remove('active');
+      this.classList.add('active');
+    });
   }
 })();
 </script>
