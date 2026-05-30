@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Join — NSCC</title>
-<meta name="description" content="Join Northside Cycling Club. No fees, no hierarchy. Sign up and ride with us in Valtellina, Italy.">
+<title>Tee — NSCC</title>
+<meta name="description" content="Heavyweight cotton tee with the NSCC wordmark across the back and a small mark on the chest. Boxy, relaxed fit for off the bike.">
 <!-- NOTE: quando metti il dominio, aggiorna og:url, twitter:url e le immagini con il nuovo indirizzo -->
-<link rel="canonical" href="https://hellonorthsidecc-ai.github.io/nscc/join.html">
+<link rel="canonical" href="https://hellonorthsidecc-ai.github.io/nscc/tee.html">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Northside Cycling Club">
-<meta property="og:title" content="Join — NSCC">
-<meta property="og:description" content="Join Northside Cycling Club. No fees, no hierarchy. Sign up and ride with us.">
-<meta property="og:url" content="https://hellonorthsidecc-ai.github.io/nscc/join.html">
-<meta property="og:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/hero.jpg">
+<meta property="og:title" content="Tee — NSCC">
+<meta property="og:description" content="Tee — NSCC. Heavyweight cotton tee with the NSCC wordmark across the back and a small mark on the chest. Boxy, relaxed fit for off the bike.">
+<meta property="og:url" content="https://hellonorthsidecc-ai.github.io/nscc/tee.html">
+<meta property="og:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/tshirt.jpeg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Join — NSCC">
-<meta name="twitter:description" content="Join Northside Cycling Club. No fees, no hierarchy.">
-<meta name="twitter:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/hero.jpg">
+<meta name="twitter:title" content="Tee — NSCC">
+<meta name="twitter:description" content="Tee — NSCC.">
+<meta name="twitter:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/tshirt.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -45,21 +45,9 @@ nav {
   will-change: transform;
 }
 nav.nav-hidden { transform: translateY(-100%); }
-.nav-logo {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-.nav-logo img {
-  height: 36px;
-  width: auto;
-  display: block;
-}
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo img { height: 36px; width: auto; display: block; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
   color: #9AA696;
   font-family: 'Space Mono', monospace;
@@ -72,43 +60,26 @@ nav.nav-hidden { transform: translateY(-100%); }
 }
 .nav-links a:hover { opacity: 1; }
 .nav-links a.active { opacity: 1; }
-/* mobile menu toggle (two bars, hidden on desktop) */
 .nav-toggle {
   display: none;
   position: relative;
-  width: 26px;
-  height: 14px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 101;
+  width: 26px; height: 14px;
+  background: transparent; border: none; cursor: pointer; padding: 0; z-index: 101;
 }
 .nav-toggle span {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: #9AA696;
+  position: absolute; left: 0; width: 100%; height: 1.5px; background: #9AA696;
   transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
 }
 .nav-toggle span:nth-child(1) { top: 3px; }
 .nav-toggle span:nth-child(2) { top: 11px; }
 nav.menu-open .nav-toggle span:nth-child(1) { top: 7px; transform: rotate(45deg); }
 nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg); }
-/* fullscreen mobile menu overlay (separate from nav so transform doesn't trap it) */
 .mobile-menu {
   display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 95;
+  position: fixed; inset: 0; z-index: 95;
   background: #000;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
-  opacity: 0;
-  visibility: hidden;
+  flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+  opacity: 0; visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 .mobile-menu.open { opacity: 1; visibility: visible; }
@@ -126,15 +97,89 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 .mobile-menu a.active { color: #4B5F45; opacity: 1; }
 .mobile-menu a:active { opacity: 1; color: #4B5F45; }
 .mobile-menu .mm-coords {
-  position: absolute;
-  bottom: 40px;
+  position: absolute; bottom: 40px;
   font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #4B5F45;
-  font-weight: 400;
-  opacity: 0.8;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #4B5F45; font-weight: 400; opacity: 0.8;
+}
+
+/* ── PRODUCT DETAIL ── */
+.pd { flex: 1; padding: 120px 40px 90px 40px; }
+.pd-back {
+  color: #4B5F45; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none; display: inline-block; margin-bottom: 48px; transition: color 0.2s;
+}
+.pd-back:hover { color: #9AA696; }
+.pd-grid { display: flex; gap: 64px; align-items: flex-start; }
+.pd-media {
+  flex: 0 0 46%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid #111;
+  display: flex; align-items: center; justify-content: center;
+  padding: 7%;
+}
+.pd-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.pd-info { flex: 1; padding-top: 6px; }
+.pd-num { color: #4B5F45; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; }
+.pd-name {
+  color: #9AA696; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  text-transform: uppercase; font-size: clamp(2.6em, 6vw, 4.5em); line-height: 1;
+  letter-spacing: 0.03em; margin: 0 0 16px 0;
+}
+.pd-price { color: #9AA696; font-size: 14px; letter-spacing: 0.1em; margin-bottom: 34px; }
+.pd-desc { color: #9AA696; opacity: 0.9; font-size: 13px; line-height: 1.95; max-width: 420px; margin-bottom: 34px; }
+.pd-details { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 36px; max-width: 420px; }
+.pd-details li {
+  color: #4B5F45; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  border-top: 1px solid #111; padding: 12px 0;
+}
+.pd-soon { color: #4B5F45; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+@media (max-width: 768px) {
+  .pd { padding: 100px 24px 70px 24px; }
+  .pd-grid { flex-direction: column; gap: 36px; }
+  .pd-media { flex: none; width: 100%; aspect-ratio: 1 / 1; padding: 10%; }
+  .pd-back { margin-bottom: 32px; }
+  .pd-name { font-size: clamp(2.4em, 11vw, 3.6em); }
+}
+
+/* ── FOOTER ── */
+footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
+.footer-top { display: flex; align-items: center; }
+.footer-top > * { flex: 1 1 0; }
+.footer-logo img { height: 32px; width: auto; display: block; opacity: 0.8; }
+.footer-social { display: flex; gap: 32px; align-items: center; justify-content: center; }
+.footer-social a {
+  color: #4B5F45; font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+  position: relative; display: inline-block; padding-bottom: 3px;
+}
+.footer-social a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+  background: #4B5F45; transform: scaleX(1); transform-origin: left;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.footer-social a:hover::after { transform: scaleX(0); transform-origin: right; }
+.footer-info {
+  color: #4B5F45; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  text-align: right; line-height: 1.9;
+}
+.footer-legal { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 30px; }
+.footer-copy {
+  color: #4B5F45; font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase; margin: 0;
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a {
+  color: #4B5F45; font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+  opacity: 0.85; transition: color 0.2s;
+}
+.footer-links a:hover { color: #9AA696; }
+
+@media (max-width: 768px) {
+  .shop { padding: 100px 24px 70px 24px; }
+  .shop-grid { grid-template-columns: 1fr; gap: 48px; }
+  .shop-intro { margin-bottom: 48px; }
 }
 @media (max-width: 640px) {
   nav { padding: 18px 20px; }
@@ -143,159 +188,6 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   .nav-toggle { display: block; }
   .nav-links { display: none; }
   .mobile-menu { display: flex; }
-}
-
-/* ── JOIN PAGE ── */
-.join-page {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 120px 40px 60px 40px;
-}
-.join-head {
-  flex-shrink: 0;
-}
-.join-label {
-  color: #9AA696;
-  font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin: 0 0 24px 0;
-}
-.join-sub {
-  color: #4B5F45;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  line-height: 1.9;
-  max-width: 320px;
-  margin: 0;
-}
-.join-center {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 0;
-}
-.join-email {
-  color: #9AA696;
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(0.8em, 3vw, 1.5em);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 5px;
-  text-align: center;
-  word-break: break-word;
-}
-.join-email::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: 0;
-  width: 100%; height: 1px;
-  background: currentColor;
-  transform: scaleX(1);
-  transform-origin: left;
-  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
-}
-.join-email:hover::after {
-  transform: scaleX(0);
-  transform-origin: right;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: #000;
-  border-top: 1px solid #111;
-  padding: 32px 40px;
-}
-.footer-top {
-  display: flex;
-  align-items: center;
-}
-.footer-top > * { flex: 1 1 0; }
-.footer-logo img {
-  height: 32px;
-  width: auto;
-  display: block;
-  opacity: 0.8;
-}
-.footer-social {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-  justify-content: center;
-}
-.footer-social a {
-  color: #4B5F45;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 3px;
-}
-.footer-social a::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: 0;
-  width: 100%; height: 1px;
-  background: #4B5F45;
-  transform: scaleX(1);
-  transform-origin: left;
-  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
-}
-.footer-social a:hover::after {
-  transform: scaleX(0);
-  transform-origin: right;
-}
-.footer-info {
-  color: #4B5F45;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-align: right;
-  line-height: 1.9;
-}
-.footer-legal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 30px;
-}
-.footer-copy {
-  color: #4B5F45;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin: 0;
-}
-.footer-links { display: flex; gap: 20px; }
-.footer-links a {
-  color: #4B5F45;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  opacity: 0.85;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: #9AA696; }
-@media (max-width: 768px) {
-  .join-page { padding: 100px 24px 56px 24px; }
-  .join-center { padding: 56px 0; }
-}
-@media (max-width: 640px) {
   footer { padding: 28px 24px; }
   .footer-top { flex-direction: column; gap: 22px; align-items: center; text-align: center; }
   .footer-top > * { flex: none; }
@@ -316,33 +208,41 @@ footer {
     <li><a href="index.html#upcoming">Rides</a></li>
     <li><a href="index.html#how">How</a></li>
     <li><a href="index.html#behind">Behind</a></li>
-    <li><a href="merch.html">Merch</a></li>
-    <li><a href="join.html" class="active">Join</a></li>
+    <li><a href="merch.html" class="active">Merch</a></li>
+    <li><a href="join.html">Join</a></li>
   </ul>
   <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
     <span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU OVERLAY -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
   <a href="index.html#upcoming">Rides</a>
   <a href="index.html#how">How</a>
   <a href="index.html#behind">Behind</a>
-  <a href="merch.html">Merch</a>
-  <a href="join.html" class="active">Join</a>
+  <a href="merch.html" class="active">Merch</a>
+  <a href="join.html">Join</a>
   <span class="mm-coords">46°22'N · 09°28'E · Valtellina, IT</span>
 </div>
 
-<!-- JOIN PAGE -->
-<main class="join-page">
-  <div class="join-head">
-    <p class="join-label">Join us</p>
-    <p class="join-sub">No membership fees.<br>No hierarchy.<br>Just people who love rides and community.</p>
-  </div>
-  <div class="join-center">
-    <a class="join-email" href="mailto:hello.northsidecc@gmail.com">hello.northsidecc@gmail.com</a>
+<!-- SHOP -->
+<main class="pd">
+  <a class="pd-back" href="merch.html">← Merch</a>
+  <div class="pd-grid">
+    <div class="pd-media"><img src="img/tshirt.jpeg" alt="NSCC heavyweight cotton tee"></div>
+    <div class="pd-info">
+      <p class="pd-num">02 · Drop 001</p>
+      <h1 class="pd-name">Tee</h1>
+      <p class="pd-price">€35</p>
+      <p class="pd-desc">Heavyweight cotton tee with the NSCC wordmark across the back and a small mark on the chest. Boxy, relaxed fit for off the bike.</p>
+      <ul class="pd-details">
+        <li>100% cotton</li>
+        <li>Oversized fit</li>
+        <li>Sizes S–XL</li>
+      </ul>
+      <p class="pd-soon">Available soon</p>
+    </div>
   </div>
 </main>
 
