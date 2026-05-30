@@ -621,9 +621,9 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   pointer-events: none;
 }
 .mt-bg img {
-  width: min(135%, 1300px);
+  width: min(170%, 1750px);
   height: auto;
-  filter: blur(12px);
+  filter: blur(9px);
   opacity: 0.4;
   user-select: none;
   -webkit-user-drag: none;
@@ -638,24 +638,24 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 .morethan-title {
   color: #9AA696;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2.8em, 8vw, 6.5em);
+  font-size: clamp(1.6em, 7vw, 5em);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  line-height: 0.92;
+  line-height: 1;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  white-space: nowrap;
   text-shadow: 0 2px 40px rgba(0,0,0,0.9), 0 0 14px rgba(0,0,0,0.8);
 }
-.morethan-line { display: block; }
+.morethan-line { display: inline; }
 #mt-word {
   display: inline-block;
   color: #9AA696;
 }
 @media (max-width: 768px) {
   #morethan { min-height: 70vh; padding: 80px 24px; }
-  .mt-bg img { width: 150%; filter: blur(10px); }
+  .mt-bg img { width: 190%; filter: blur(8px); }
 }
 
 /* ── JOIN ── */
