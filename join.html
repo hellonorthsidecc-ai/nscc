@@ -236,6 +236,8 @@ footer {
   background: #000;
   border-top: 1px solid #111;
   padding: 32px 40px;
+}
+.footer-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -284,15 +286,43 @@ footer {
   text-align: right;
   line-height: 1.9;
 }
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 28px;
+}
+.footer-copy {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #9AA696; }
 @media (max-width: 768px) {
   .join-page { flex-direction: column; padding: 120px 24px 60px 24px; gap: 48px; }
   .join-page-title { font-size: clamp(2.5em, 8vw, 4em); }
 }
 @media (max-width: 640px) {
-  footer { padding: 28px 24px; flex-direction: column; gap: 22px; align-items: center; text-align: center; }
+  footer { padding: 28px 24px; }
+  .footer-top { flex-direction: column; gap: 22px; align-items: center; text-align: center; }
   .footer-logo img { height: 24px; }
   .footer-info { text-align: center; }
   .footer-social { gap: 24px; }
+  .footer-legal { flex-direction: column; gap: 14px; margin-top: 24px; text-align: center; }
 }
 </style>
 </head>
@@ -354,14 +384,23 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <a class="footer-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
-  <div class="footer-social">
-    <a href="https://www.instagram.com/northsidecc_/" target="_blank">Instagram</a>
-    <a href="https://www.strava.com/clubs/northsidecc" target="_blank">Strava</a>
+  <div class="footer-top">
+    <a class="footer-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/northsidecc_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.strava.com/clubs/northsidecc" target="_blank" rel="noopener">Strava</a>
+    </div>
+    <div class="footer-info">
+      <div>Northside Cycling Club</div>
+      <div>Valtellina, IT · Est. 2026</div>
+    </div>
   </div>
-  <div class="footer-info">
-    <div>Northside Cycling Club</div>
-    <div>Valtellina, IT · Est. 2026</div>
+  <div class="footer-legal">
+    <p class="footer-copy">© 2026 Northside Cycling Club. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Cookies</a>
+    </div>
   </div>
 </footer>
 

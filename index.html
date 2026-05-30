@@ -284,22 +284,37 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 /* ── UPCOMING ── */
 #upcoming {
   background: #000;
-  padding: 100px 40px;
+  min-height: 100svh;
+  padding: 120px 40px 56px;
   border-top: 1px solid #111;
+  display: flex;
+  flex-direction: column;
+}
+.up-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .event-label {
   color: #9AA696;
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin: 0 0 28px 0;
+  margin: 0;
+}
+.up-head-tag {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 .event-main {
+  flex: 1;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding-top: 36px;
-  border-top: 1px solid #1a2a18;
+  align-items: center;
+  gap: 40px;
 }
 .event-number {
   color: #4B5F45;
@@ -307,34 +322,34 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   line-height: 1;
   min-height: 1.2em;
 }
 .event-title {
   color: #9AA696;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2em, 4vw, 3.5em);
+  font-size: clamp(2.6em, 7vw, 6em);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   margin: 0;
-  line-height: 1.1;
+  line-height: 1.02;
   display: flex;
   flex-direction: column;
 }
-.event-title span { display: block; min-height: 1.1em; }
+.event-title span { display: block; min-height: 1.02em; }
 .event-right {
   text-align: right;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-end;
-  gap: 16px;
+  gap: 20px;
+  flex-shrink: 0;
 }
 .event-meta {
   color: #9AA696;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin: 0;
@@ -366,8 +381,8 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   animation: blink 0.8s step-end infinite;
 }
 @media (max-width: 640px) {
-  #upcoming { padding: 60px 24px; }
-  .event-main { flex-direction: column; align-items: flex-start; gap: 32px; }
+  #upcoming { min-height: 100svh; padding: 96px 24px 40px; }
+  .event-main { flex-direction: column; align-items: flex-start; justify-content: center; gap: 28px; }
   .event-right { align-items: flex-start; text-align: left; }
 }
 
@@ -440,40 +455,61 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 /* ── HOW IT WORKS ── */
 #how {
   background: #000;
-  padding: 100px 40px;
-  border-top: 1px solid #111;
+  min-height: 100svh;
+  padding: 120px 40px 56px;
+  border-top: 1px solid #1a2a18;
+  display: flex;
+  flex-direction: column;
+}
+.how-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .how-label {
   color: #9AA696;
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin: 0 0 40px 0;
+  margin: 0;
+}
+.how-head-tag {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.how-grid-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 .how-grid {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: #222;
+  background: #1a2a18;
 }
 .how-col {
   background: #000;
-  padding: 32px 24px;
+  padding: 56px 36px;
 }
 .how-num {
   color: #4B5F45;
   font-size: 11px;
   letter-spacing: 0.15em;
-  margin: 0 0 20px 0;
+  margin: 0 0 28px 0;
 }
 .how-title {
   color: #4B5F45;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.9em;
+  font-size: 2.2em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin: 0 0 16px 0;
+  margin: 0 0 18px 0;
   line-height: 1.1;
   min-height: 1.1em;
   visibility: hidden;
@@ -481,15 +517,30 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 #how-t1 { visibility: hidden; }
 .how-text {
   color: #9AA696;
-  font-size: 0.9em;
-  line-height: 1.9;
+  font-size: 0.92em;
+  line-height: 1.95;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin: 0;
 }
+.how-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.how-foot span {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
 @media (max-width: 640px) {
-  #how { padding: 60px 24px; }
+  #how { min-height: 100svh; padding: 96px 24px 40px; }
   .how-grid { grid-template-columns: 1fr; }
+  .how-col { padding: 32px 0; background: #000; }
+  .how-grid { background: transparent; gap: 1px; }
+  .how-col + .how-col { border-top: 1px solid #1a2a18; }
 }
 
 /* ── BEHIND ── */
@@ -668,6 +719,8 @@ footer {
   background: #000;
   border-top: 1px solid #111;
   padding: 32px 40px;
+}
+.footer-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -707,7 +760,6 @@ footer {
 .footer-social a:hover::after {
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
 }
 .footer-info {
   color: #4B5F45;
@@ -717,11 +769,39 @@ footer {
   text-align: right;
   line-height: 1.9;
 }
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 28px;
+}
+.footer-copy {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  color: #4B5F45;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #9AA696; }
 @media (max-width: 640px) {
-  footer { padding: 28px 24px; flex-direction: column; gap: 22px; align-items: center; text-align: center; }
+  footer { padding: 28px 24px; }
+  .footer-top { flex-direction: column; gap: 22px; align-items: center; text-align: center; }
   .footer-logo img { height: 24px; }
   .footer-info { text-align: center; }
   .footer-social { gap: 24px; }
+  .footer-legal { flex-direction: column; gap: 14px; margin-top: 24px; text-align: center; }
 }
 </style>
 </head>
@@ -770,9 +850,12 @@ footer {
 
 <!-- UPCOMING -->
 <section id="upcoming">
-  <p class="event-label">Upcoming</p>
+  <div class="up-head">
+    <p class="event-label">Upcoming</p>
+    <span class="up-head-tag">Next ride</span>
+  </div>
   <div class="event-main">
-    <div>
+    <div class="event-left">
       <p class="event-number" id="ev-num">NSCC #001</p>
       <p class="event-title">
         <span id="ev-t1"></span>
@@ -781,7 +864,7 @@ footer {
     </div>
     <div class="event-right">
       <p class="event-meta">Valtellina, IT<br>Summer 2026</p>
-      <a class="event-btn" href="https://strava.com" target="_blank">Sign up on Strava →</a>
+      <a class="event-btn" href="https://www.strava.com/clubs/northsidecc" target="_blank">Sign up on Strava →</a>
     </div>
   </div>
 </section>
@@ -797,23 +880,32 @@ footer {
 
 <!-- HOW IT WORKS -->
 <section id="how">
-  <p class="how-label">How it works</p>
-  <div class="how-grid">
-    <div class="how-col">
-      <p class="how-num">01</p>
-      <p class="how-title" id="how-t1">Follow the rides</p>
-      <p class="how-text">We post upcoming rides here and on Instagram. No membership fees, no hierarchy.</p>
+  <div class="how-head">
+    <p class="how-label">How it works</p>
+    <span class="how-head-tag">Three steps</span>
+  </div>
+  <div class="how-grid-wrap">
+    <div class="how-grid">
+      <div class="how-col">
+        <p class="how-num">01</p>
+        <p class="how-title" id="how-t1">Follow the rides</p>
+        <p class="how-text">We post upcoming rides here, on Instagram and Strava. No membership fees, no hierarchy.</p>
+      </div>
+      <div class="how-col">
+        <p class="how-num">02</p>
+        <p class="how-title" id="how-t2">Sign up</p>
+        <p class="how-text">Sign up for the ride on Strava. You'll find all the details there.</p>
+      </div>
+      <div class="how-col">
+        <p class="how-num">03</p>
+        <p class="how-title" id="how-t3">Ride with us</p>
+        <p class="how-text">We meet, we ride. There's often an aperitivo after. Welcome to NSCC.</p>
+      </div>
     </div>
-    <div class="how-col">
-      <p class="how-num">02</p>
-      <p class="how-title" id="how-t2">Sign up</p>
-      <p class="how-text">Fill in the form. We'll reach out before the ride with all the details you need.</p>
-    </div>
-    <div class="how-col">
-      <p class="how-num">03</p>
-      <p class="how-title" id="how-t3">Ride with us</p>
-      <p class="how-text">We meet, we ride. There's always an aperitivo after. Welcome to the club.</p>
-    </div>
+  </div>
+  <div class="how-foot">
+    <span>No fees · No hierarchy</span>
+    <span>Est. 2026</span>
   </div>
 </section>
 
@@ -843,14 +935,23 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <a class="footer-logo" href="#"><img src="img/logo.png" alt="NSCC"></a>
-  <div class="footer-social">
-    <a href="https://www.instagram.com/northsidecc_/" target="_blank">Instagram</a>
-    <a href="https://www.strava.com/clubs/northsidecc" target="_blank">Strava</a>
+  <div class="footer-top">
+    <a class="footer-logo" href="index.html"><img src="img/logo.png" alt="NSCC"></a>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/northsidecc_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.strava.com/clubs/northsidecc" target="_blank" rel="noopener">Strava</a>
+    </div>
+    <div class="footer-info">
+      <div>Northside Cycling Club</div>
+      <div>Valtellina, IT · Est. 2026</div>
+    </div>
   </div>
-  <div class="footer-info">
-    <div>Northside Cycling Club</div>
-    <div>Valtellina, IT · Est. 2026</div>
+  <div class="footer-legal">
+    <p class="footer-copy">© 2026 Northside Cycling Club. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Cookies</a>
+    </div>
   </div>
 </footer>
 
