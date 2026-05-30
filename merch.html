@@ -16,11 +16,11 @@
 <meta property="og:title" content="Merch — NSCC">
 <meta property="og:description" content="NSCC club kit — Drop 001. Jersey, bib shorts, tee, socks and bidon.">
 <meta property="og:url" content="https://hellonorthsidecc-ai.github.io/nscc/merch.html">
-<meta property="og:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/kit.jpeg">
+<meta property="og:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/tshirt.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Merch — NSCC">
 <meta name="twitter:description" content="NSCC club kit — Drop 001.">
-<meta name="twitter:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/kit.jpeg">
+<meta name="twitter:image" content="https://hellonorthsidecc-ai.github.io/nscc/img/tshirt.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -122,9 +122,8 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .shop-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px 40px;
-  max-width: 860px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px 40px;
 }
 .product { text-decoration: none; display: block; }
 .product-media {
@@ -201,8 +200,10 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
 
 @media (max-width: 768px) {
   .shop { padding: 100px 24px 70px 24px; }
-  .shop-grid { grid-template-columns: 1fr; gap: 48px; }
   .shop-intro { margin-bottom: 48px; }
+}
+@media (max-width: 560px) {
+  .shop-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (max-width: 640px) {
   nav { padding: 18px 20px; }
@@ -258,23 +259,11 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
   <p class="shop-intro">Club kit, made to ride in. NSCC green on white — a small first drop.</p>
 
   <div class="shop-grid">
-    <a class="product" href="kit.html">
-      <div class="product-media"><img src="img/kit.jpeg" alt="NSCC race kit — jersey and bib shorts"></div>
-      <div class="product-row">
-        <div>
-          <p class="product-num">01</p>
-          <p class="product-name">Race Kit</p>
-          <p class="product-desc">Jersey + bib shorts</p>
-        </div>
-        <p class="product-price">€120</p>
-      </div>
-    </a>
-
     <a class="product" href="tee.html">
       <div class="product-media"><img src="img/tshirt.jpeg" alt="NSCC cotton tee"></div>
       <div class="product-row">
         <div>
-          <p class="product-num">02</p>
+          <p class="product-num">01</p>
           <p class="product-name">Tee</p>
           <p class="product-desc">Heavyweight cotton</p>
         </div>
@@ -286,7 +275,7 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
       <div class="product-media"><img src="img/socks.jpeg" alt="NSCC performance socks"></div>
       <div class="product-row">
         <div>
-          <p class="product-num">03</p>
+          <p class="product-num">02</p>
           <p class="product-name">Socks</p>
           <p class="product-desc">Performance crew</p>
         </div>
@@ -298,7 +287,7 @@ footer { background: #000; border-top: 1px solid #111; padding: 32px 40px; }
       <div class="product-media"><img src="img/bidon.jpeg" alt="NSCC water bottle"></div>
       <div class="product-row">
         <div>
-          <p class="product-num">04</p>
+          <p class="product-num">03</p>
           <p class="product-name">Bidon</p>
           <p class="product-desc">750ml bottle</p>
         </div>
