@@ -899,12 +899,11 @@ footer {
   .footer-legal { flex-direction: column; gap: 10px; margin-top: 22px; text-align: center; }
 }
 
-/* ── TEMA CHIARO: grana ovunque; foto visibili con SOLO grana sopra (niente velo crema) ── */
+/* ── TEMA CHIARO: grana uniforme; foto con overlay leggibile + logo sfocato ── */
 html{ background-color:var(--bg); background-image:var(--grain); background-repeat:repeat; }
 body{ background:transparent; }
-#hero::after, #manifesto::after{ background-color:transparent; }
+#hero::after, #manifesto::after{ background-color:rgba(240,237,232,0.55); }
 #upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
-#morethan .mt-bg{ display:none; }
 </style>
 </head>
 <body>
