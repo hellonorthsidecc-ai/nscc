@@ -898,6 +898,14 @@ footer {
   .footer-social { gap: 24px; }
   .footer-legal { flex-direction: column; gap: 10px; margin-top: 22px; text-align: center; }
 }
+
+/* ── TEMA CHIARO: grana ovunque + sezioni pulite (fix) ── */
+html{ background-color:var(--bg); background-image:var(--grain); background-repeat:repeat; }
+body{ background:transparent; }
+#hero{ background:transparent; }
+#hero::after{ display:none; }
+#upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
+#morethan .mt-bg{ display:none; }
 </style>
 </head>
 <body>
