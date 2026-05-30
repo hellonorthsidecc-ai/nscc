@@ -239,9 +239,9 @@ footer {
 }
 .footer-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
+.footer-top > * { flex: 1 1 0; }
 .footer-logo img {
   height: 32px;
   width: auto;
@@ -252,6 +252,7 @@ footer {
   display: flex;
   gap: 32px;
   align-items: center;
+  justify-content: center;
 }
 .footer-social a {
   color: #4B5F45;
@@ -320,6 +321,7 @@ footer {
 @media (max-width: 640px) {
   footer { padding: 28px 24px; }
   .footer-top { flex-direction: column; gap: 22px; align-items: center; text-align: center; }
+  .footer-top > * { flex: none; }
   .footer-logo img { height: 24px; }
   .footer-info { text-align: center; }
   .footer-social { gap: 24px; }
