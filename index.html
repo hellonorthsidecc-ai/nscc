@@ -604,22 +604,30 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 /* ── MORE THAN ── */
 #morethan {
   position: relative;
+  background: #000;
   min-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 100px 40px;
   overflow: hidden;
-  background-image: url('img/linea.jpeg');
-  background-size: cover;
-  background-position: center;
 }
-#morethan::after {
-  content: '';
+.mt-bg {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.70);
   z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.mt-bg img {
+  width: min(135%, 1300px);
+  height: auto;
+  filter: blur(26px);
+  opacity: 0.4;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 /* centred headline */
 .mt-center {
@@ -639,7 +647,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   margin: 0;
   display: flex;
   flex-direction: column;
-  text-shadow: 0 2px 30px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.7);
+  text-shadow: 0 2px 40px rgba(0,0,0,0.9), 0 0 14px rgba(0,0,0,0.8);
 }
 .morethan-line { display: block; }
 #mt-word {
@@ -648,6 +656,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 @media (max-width: 768px) {
   #morethan { min-height: 70vh; padding: 80px 24px; }
+  .mt-bg img { width: 150%; filter: blur(20px); }
 }
 
 /* ── JOIN ── */
@@ -771,23 +780,24 @@ footer {
 }
 .footer-legal {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 40px;
-  margin-top: 28px;
+  gap: 12px;
+  margin-top: 30px;
 }
 .footer-copy {
   color: #4B5F45;
   font-family: 'Space Mono', monospace;
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin: 0;
 }
-.footer-links { display: flex; gap: 24px; }
+.footer-links { display: flex; gap: 20px; }
 .footer-links a {
   color: #4B5F45;
   font-family: 'Space Mono', monospace;
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
@@ -801,7 +811,7 @@ footer {
   .footer-logo img { height: 24px; }
   .footer-info { text-align: center; }
   .footer-social { gap: 24px; }
-  .footer-legal { flex-direction: column; gap: 14px; margin-top: 24px; text-align: center; }
+  .footer-legal { flex-direction: column; gap: 10px; margin-top: 22px; text-align: center; }
 }
 </style>
 </head>
@@ -925,6 +935,7 @@ footer {
 
 <!-- MORE THAN -->
 <section id="morethan">
+  <div class="mt-bg" aria-hidden="true"><img src="img/logo.png" alt=""></div>
   <div class="mt-center">
     <p class="morethan-title">
       <span class="morethan-line">More than</span>
