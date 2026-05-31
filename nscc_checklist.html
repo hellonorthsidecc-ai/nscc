@@ -1,74 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NSCC — Checklist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ECEEE9; --green-1:#4C5F49; --green-2:#6E7D66; --sage:#9AA696;
-    --line:#cfd3cb; --cream:#ECEEE9;
+    --bg:#ECEEE9; --green-1:#4C5F49; --green-2:#6E7D66; --sage:#9AA696; --line:#cfd3cb; --cream:#ECEEE9;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  body{
-    background:var(--bg);
-    color:var(--green-1);
-    font-family:'Space Mono',monospace;
-    padding:28px 20px 60px;
-    line-height:1.5;
-  }
-  .wrap{max-width:680px;margin:0 auto;}
-  .eyebrow{
-    font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green-2);
-    display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
-  }
-  h1{
-    font-family:'Barlow Condensed',sans-serif;font-weight:700;
-    font-size:clamp(40px,11vw,68px);line-height:0.95;text-transform:uppercase;
-    letter-spacing:0.01em;color:var(--green-1);margin-bottom:4px;
-  }
+  body{background:var(--bg);color:var(--green-1);font-family:'Space Mono',monospace;padding:28px 20px 70px;line-height:1.5;}
+  .wrap{max-width:700px;margin:0 auto;}
+  .eyebrow{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green-2);display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(40px,11vw,66px);line-height:0.92;text-transform:uppercase;letter-spacing:0.01em;margin-bottom:6px;}
   .sub{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-2);margin-bottom:26px;}
-  /* progress */
   .prog-row{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-2);margin-bottom:8px;}
   .prog-pct{font-weight:700;color:var(--green-1);font-size:13px;}
-  .bar{height:6px;background:#dfe2dc;border:1px solid var(--line);position:relative;overflow:hidden;margin-bottom:34px;}
+  .bar{height:6px;background:#dfe2dc;border:1px solid var(--line);position:relative;overflow:hidden;margin-bottom:36px;}
   .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--green-1);transition:width .35s cubic-bezier(.4,0,.2,1);}
-  /* sections */
   .sec{margin-bottom:30px;}
-  .sec-head{
-    display:flex;align-items:center;gap:12px;margin-bottom:14px;
-    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;
-    text-transform:uppercase;letter-spacing:0.04em;color:var(--green-1);
-  }
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:23px;text-transform:uppercase;letter-spacing:0.04em;}
   .sec-head .num{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--green-2);letter-spacing:0.15em;}
   .sec-head .ln{flex:1;height:1px;background:var(--line);}
   ul{list-style:none;}
-  li{
-    display:flex;align-items:flex-start;gap:12px;padding:11px 0;
-    border-bottom:1px solid var(--line);cursor:pointer;user-select:none;
-  }
+  li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;}
   li:last-child{border-bottom:none;}
-  .box{
-    flex:0 0 auto;width:18px;height:18px;border:1.5px solid var(--green-2);
-    margin-top:1px;position:relative;transition:background .15s,border-color .15s;
-  }
-  .box::after{
-    content:'';position:absolute;left:4px;top:0px;width:6px;height:11px;
-    border:solid var(--cream);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);
-    transition:transform .15s;
-  }
+  .box{flex:0 0 auto;width:18px;height:18px;border:1.5px solid var(--green-2);margin-top:2px;position:relative;transition:background .15s,border-color .15s;}
+  .box::after{content:'';position:absolute;left:4px;top:0;width:6px;height:11px;border:solid var(--cream);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .15s;}
   li.done .box{background:var(--green-1);border-color:var(--green-1);}
   li.done .box::after{transform:rotate(45deg) scale(1);}
+  .id{flex:0 0 auto;font-size:10px;color:var(--sage);letter-spacing:0.1em;margin-top:3px;min-width:26px;}
   .txt{font-size:13.5px;letter-spacing:0.01em;transition:color .15s,opacity .15s;}
   li.done .txt{color:var(--green-2);opacity:.5;text-decoration:line-through;}
-  .txt .opt{font-size:10px;color:var(--sage);letter-spacing:0.15em;text-transform:uppercase;margin-left:6px;}
-  .footer{margin-top:34px;display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-2);}
+  .txt .opt{font-size:10px;color:var(--sage);letter-spacing:0.14em;text-transform:uppercase;margin-left:6px;}
+  .footer{margin-top:36px;display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-2);}
   .reset{background:none;border:1px solid var(--line);color:var(--green-2);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:7px 12px;cursor:pointer;transition:.15s;}
   .reset:hover{border-color:var(--green-2);color:var(--green-1);}
 </style>
-
+</head>
+<body>
 <div class="wrap">
-  <div class="eyebrow"><span>NSCC #001</span><span>Ride · Aperitivo · DJ Set</span></div>
-  <h1>Opening Ride<br>Checklist</h1>
-  <div class="sub">Sab 20 giugno 2026 · Sondrio, IT</div>
+  <div class="eyebrow"><span>NSCC</span><span>Ride · Aperitivo · DJ Set</span></div>
+  <h1>Checklist<br>Progetto</h1>
+  <div class="sub">Opening Ride · Sab 20 giugno 2026 · Sondrio, IT</div>
 
   <div class="prog-row"><span>Avanzamento</span><span class="prog-pct" id="pct">0%</span></div>
   <div class="bar"><div class="bar-fill" id="fill"></div></div>
@@ -82,59 +58,78 @@
 </div>
 
 <script>
-const KEY = 'nscc_opening_checklist_v1';
+const KEY = 'nscc_checklist_v2';
 
-// data: [section, [items...]]  item = {id, text, opt?, done?(default)}
 const DATA = [
-  ["Già fatto", [
-    {id:'d1', text:'Sito base online (hero, sezioni, footer)', done:true},
-    {id:'d2', text:'Link Strava sistemati ovunque', done:true},
-    {id:'d3', text:'Sezione Opening Ride con mappa GPX reale', done:true},
-    {id:'d4', text:'3 versioni del messaggio di lancio pronte', done:true},
-    {id:'d5', text:'Post Instagram di lancio creati (in standby)', done:true},
-    {id:'d6', text:'Foto Behind ritagliata (te + Enri)', done:true},
+  ["Brand & identità", [
+    "Pulire/sistemare la foto founders (Behind) e chiuderla",
+    "Banca foto/video del club (ride, lifestyle, ritratti)",
+    "Bio standard + tone of voice (uguale su sito, IG, email)",
+    "Fare gli adesivi (formato, quantità, fornitore)",
+    "Welcome kit / tessera membro|opz.",
   ]],
-  ["Sito", [
-    {id:'s1', text:'Caricare behind.jpg in img/ e pubblicare l\u2019index aggiornato'},
-    {id:'s2', text:'Pulire la foto Behind col telefono (Clean Up / Magic Eraser) e rimandarmela', opt:'opz.'},
-    {id:'s3', text:'Verificare pagine prodotto merch (tee / socks / bidon): esistono e i link vanno?'},
-    {id:'s4', text:'Test su telefono: mappa GPX, sezione How, footer'},
-    {id:'s5', text:'Controllare che il dominio northsidecc.com sia attivo e funzionante'},
+  ["Sito web", [
+    "Verificare/finire le pagine prodotto (tee / socks / bidon) e i link",
+    "Pagina iscrizione (Join) funzionante \u2014 verificare se arriva la mail",
+    "Controllo link ovunque (Strava, IG, email)",
+    "Creare l\u2019evento Strava e cambiare il link sul sito una volta fatto",
+    "Test completo da telefono",
   ]],
-  ["Evento \u2014 20 giugno", [
-    {id:'e1', text:'Fissare orario e punto di ritrovo esatto a Sondrio'},
-    {id:'e2', text:'Definire il percorso definitivo e caricarlo come Route su Strava'},
-    {id:'e3', text:'Creare l\u2019evento RSVP su Strava (club + evento)'},
-    {id:'e4', text:'Accordo col locale per l\u2019aperitivo (posti, orario, costo)'},
-    {id:'e5', text:'Confermare il DJ set (chi, attrezzatura, corrente, orario)'},
-    {id:'e6', text:'Capo-gruppo + ritmo no-drop + eventuale \u201cscopa\u201d dietro'},
-    {id:'e7', text:'Acqua / ristoro lungo il giro o all\u2019arrivo'},
-    {id:'e8', text:'Piano B in caso di pioggia'},
+  ["Merch / prodotto", [
+    "Vedere i sample",
+    "Confermare fornitore: prezzi, minimi d\u2019ordine, tempi",
+    "Decidere taglie e quantità del primo drop",
+    "All\u2019evento: regalare i bidon + noi in maglia; se la vogliono \u2192 preorder per il drop",
+    "Eventuale packaging",
   ]],
-  ["Lancio & community", [
-    {id:'l1', text:'Mandare il messaggio di lancio a contatti e amici'},
-    {id:'l2', text:'Creare il gruppo WhatsApp / Telegram della community'},
-    {id:'l3', text:'Decidere quando pubblicare i post Instagram (uscita feed)'},
-    {id:'l4', text:'Volantino stampabile per bar / bike shop', opt:'opz.'},
-    {id:'l5', text:'Email di lancio in BCC ai contatti', opt:'opz.'},
+  ["Evento \u2014 Opening Ride (20 giugno)", [
+    "Orario + punto di ritrovo esatto a Sondrio",
+    "Percorso definitivo \u2192 caricarlo come Route su Strava",
+    "Evento RSVP su Strava (club + evento)",
+    "Contattare il bar per l\u2019aperitivo (posti, orario, menu, costo)",
+    "DJ set: sentire Enni",
+    "Totem o altro alla ride? Qualcosa per fare branding",
+    "Capo-gruppo + ritmo no-drop + \u201cscopa\u201d dietro",
+    "Stima partecipanti (serve a bar, logistica, merch)",
+    "Piano B meteo",
   ]],
-  ["Il giorno dell\u2019evento", [
-    {id:'g1', text:'Qualcuno che scatta foto / video'},
-    {id:'g2', text:'Punto di ritrovo riconoscibile (cartello / bandiera)'},
-    {id:'g3', text:'Accoglienza / lista presenze'},
+  ["Legale / sicurezza / assicurazione", [
+    "Sentire l\u2019avvocato per l\u2019assicurazione (responsabilità sulle uscite)",
+    "Liberatoria/waiver per i partecipanti se necessarie (vedere One Million Ride)",
+    "Serve una forma giuridica? (es. ASD / tesseramento per coprire le ride)",
+    "Permessi: ritrovo/suolo pubblico, musica del DJ (SIAE)",
   ]],
-  ["Dopo", [
-    {id:'p1', text:'Post di ringraziamento + recap del giorno'},
-    {id:'p2', text:'Pianificare la ride #002'},
+  ["Comunicazione & lancio", [
+    "Mandare il messaggio di lancio (IG, Strava, sistemare sito)",
+    "Data e ordine d\u2019uscita dei post IG (standby \u2014 layout e post con Enni)",
+    "Aprire il gruppo WhatsApp della community|tbd",
+    "Volantino + adesivi in bar / bike shop / palestre|tbd",
+  ]],
+  ["Giorno dell\u2019evento", [
+    "Qualcuno dedicato a foto/video",
+    "Punto di ritrovo riconoscibile",
+    "Storia taggandoci \u2192 bidon in regalo // oppure: follow IG + iscritti gruppo Strava",
+    "Regalare adesivi",
+  ]],
+  ["Dopo l\u2019evento", [
+    "Post IG di ringraziamento + recap (foto/video)",
+  ]],
+  ["Più avanti (crescita)", [
+    "Calendario ride ricorrenti",
+    "Pianificare la ride #002 / calendario uscite",
+    "Collaborazioni (bike shop, bar, brand locali)",
+    "Membership / tesseramento",
+    "Ampliare il merch",
   ]],
 ];
 
 let state = {};
 
-function defaults(){
-  const d = {};
-  DATA.forEach(([,items])=>items.forEach(it=>{ if(it.done) d[it.id]=true; }));
-  return d;
+function loadState(){
+  try{ const raw = localStorage.getItem(KEY); if(raw) state = JSON.parse(raw); }catch(e){ state = {}; }
+}
+function saveState(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
 }
 
 function render(){
@@ -143,14 +138,17 @@ function render(){
   DATA.forEach(([title, items], si)=>{
     const sec = document.createElement('div'); sec.className='sec';
     const head = document.createElement('div'); head.className='sec-head';
-    head.innerHTML = `<span class="num">${String(si).padStart(2,'0')}</span><span>${title}</span><span class="ln"></span>`;
+    head.innerHTML = `<span class="num">${String(si+1).padStart(2,'0')}</span><span>${title}</span><span class="ln"></span>`;
     sec.appendChild(head);
     const ul = document.createElement('ul');
-    items.forEach(it=>{
-      const li = document.createElement('li'); li.dataset.id = it.id;
-      if(state[it.id]) li.classList.add('done');
-      li.innerHTML = `<span class="box"></span><span class="txt">${it.text}${it.opt?`<span class="opt">${it.opt}</span>`:''}</span>`;
-      li.addEventListener('click', ()=>toggle(it.id, li));
+    items.forEach((raw, ii)=>{
+      const parts = raw.split('|');
+      const text = parts[0]; const opt = parts[1];
+      const id = `${si+1}.${ii+1}`;
+      const li = document.createElement('li'); li.dataset.id = id;
+      if(state[id]) li.classList.add('done');
+      li.innerHTML = `<span class="box"></span><span class="id">${id}</span><span class="txt">${text}${opt?`<span class="opt">${opt}</span>`:''}</span>`;
+      li.addEventListener('click', ()=>{ state[id]=!state[id]; li.classList.toggle('done',!!state[id]); saveState(); updateProgress(); });
       ul.appendChild(li);
     });
     sec.appendChild(ul);
@@ -159,39 +157,21 @@ function render(){
   updateProgress();
 }
 
-function toggle(id, li){
-  state[id] = !state[id];
-  li.classList.toggle('done', !!state[id]);
-  updateProgress();
-  save();
-}
-
 function updateProgress(){
   let total=0, done=0;
-  DATA.forEach(([,items])=>items.forEach(it=>{ total++; if(state[it.id]) done++; }));
+  DATA.forEach(([,items],si)=>items.forEach((_,ii)=>{ total++; if(state[`${si+1}.${ii+1}`]) done++; }));
   const pct = total? Math.round(done/total*100):0;
   document.getElementById('pct').textContent = pct+'%';
   document.getElementById('fill').style.width = pct+'%';
   document.getElementById('count').textContent = done+' / '+total;
 }
 
-async function save(){
-  try{ await window.storage.set(KEY, JSON.stringify(state), false); }catch(e){}
-}
-async function load(){
-  try{
-    const r = await window.storage.get(KEY, false);
-    if(r && r.value){ state = JSON.parse(r.value); }
-    else { state = defaults(); save(); }
-  }catch(e){ state = defaults(); }
-  render();
-}
-
 document.getElementById('reset').addEventListener('click', ()=>{
-  state = defaults();
-  save();
-  render();
+  if(confirm('Azzerare tutte le spunte?')){ state={}; saveState(); render(); }
 });
 
-load();
+loadState();
+render();
 </script>
+</body>
+</html>
