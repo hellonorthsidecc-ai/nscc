@@ -7,9 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#ECEEE9; --green-1:#4C5F49; --green-2:#6E7D66; --sage:#9AA696; --line:#cfd3cb; --cream:#ECEEE9;
-  }
+  :root{ --bg:#ECEEE9; --green-1:#4C5F49; --green-2:#6E7D66; --sage:#9AA696; --line:#cfd3cb; --cream:#ECEEE9; }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{background:var(--bg);color:var(--green-1);font-family:'Space Mono',monospace;padding:28px 20px 70px;line-height:1.5;}
   .wrap{max-width:700px;margin:0 auto;}
@@ -35,6 +33,9 @@
   .txt{font-size:13.5px;letter-spacing:0.01em;transition:color .15s,opacity .15s;}
   li.done .txt{color:var(--green-2);opacity:.5;text-decoration:line-through;}
   .txt .opt{font-size:10px;color:var(--sage);letter-spacing:0.14em;text-transform:uppercase;margin-left:6px;}
+  /* showcase: la sezione "Già fatto" mostra le spunte come traguardi, non barrate */
+  .done-sec .sec-head{color:var(--green-1);}
+  .done-sec li.done .txt{color:var(--green-1);opacity:1;text-decoration:none;}
   .footer{margin-top:36px;display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-2);}
   .reset{background:none;border:1px solid var(--line);color:var(--green-2);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:7px 12px;cursor:pointer;transition:.15s;}
   .reset:hover{border-color:var(--green-2);color:var(--green-1);}
@@ -53,36 +54,50 @@
 
   <div class="footer">
     <span id="count">0 / 0</span>
-    <button class="reset" id="reset">Azzera tutto</button>
+    <button class="reset" id="reset">Azzera spunte da fare</button>
   </div>
 </div>
 
 <script>
 const KEY = 'nscc_checklist_v2';
 
+// {n: prefisso id + numero mostrato, title, done?: pre-flaggato (showcase), items:["testo|opzionale"]}
 const DATA = [
-  ["Brand & identità", [
-    "Pulire/sistemare la foto founders (Behind) e chiuderla",
+  {n:'0', label:'\u2713', title:'Già fatto', done:true, items:[
+    "Piano di lancio completo (brand, Instagram, evento, timeline)",
+    "Profilo Instagram @northsidecc_ attivo",
+    "Sito web online \u2014 northsidecc.com (hero, manifesto, how, behind, more-than, join, footer)",
+    "Pagine sito: merch (Drop 001), join, privacy, cookies, link-in-bio",
+    "Anteprima condivisione (meta/OG + favicon) e pagine legali vere",
+    "Sezione Opening Ride sul sito con mappa del giro (GPX)",
+    "Link Strava ufficiali + Instagram sistemati su tutto il sito",
+    "Sito ottimizzato per mobile + foto merch in PNG (senza sfondo)",
+    "Data evento fissata: sabato 20 giugno 2026, Sondrio",
+    "Checklist di progetto (questa)",
+  ]},
+  {n:'1', title:'Brand & identità', items:[
+    "Parlare con Enni in settimana per nuove proposte (brand/identità)",
+    "Foto founders (Behind): da rifare",
     "Banca foto/video del club (ride, lifestyle, ritratti)",
     "Bio standard + tone of voice (uguale su sito, IG, email)",
     "Fare gli adesivi (formato, quantità, fornitore)",
     "Welcome kit / tessera membro|opz.",
-  ]],
-  ["Sito web", [
+  ]},
+  {n:'2', title:'Sito web', items:[
     "Verificare/finire le pagine prodotto (tee / socks / bidon) e i link",
     "Pagina iscrizione (Join) funzionante \u2014 verificare se arriva la mail",
     "Controllo link ovunque (Strava, IG, email)",
     "Creare l\u2019evento Strava e cambiare il link sul sito una volta fatto",
     "Test completo da telefono",
-  ]],
-  ["Merch / prodotto", [
+  ]},
+  {n:'3', title:'Merch / prodotto', items:[
     "Vedere i sample",
     "Confermare fornitore: prezzi, minimi d\u2019ordine, tempi",
     "Decidere taglie e quantità del primo drop",
     "All\u2019evento: regalare i bidon + noi in maglia; se la vogliono \u2192 preorder per il drop",
     "Eventuale packaging",
-  ]],
-  ["Evento \u2014 Opening Ride (20 giugno)", [
+  ]},
+  {n:'4', title:'Evento \u2014 Opening Ride (20 giugno)', items:[
     "Orario + punto di ritrovo esatto a Sondrio",
     "Percorso definitivo \u2192 caricarlo come Route su Strava",
     "Evento RSVP su Strava (club + evento)",
@@ -92,35 +107,35 @@ const DATA = [
     "Capo-gruppo + ritmo no-drop + \u201cscopa\u201d dietro",
     "Stima partecipanti (serve a bar, logistica, merch)",
     "Piano B meteo",
-  ]],
-  ["Legale / sicurezza / assicurazione", [
+  ]},
+  {n:'5', title:'Legale / sicurezza / assicurazione', items:[
     "Sentire l\u2019avvocato per l\u2019assicurazione (responsabilità sulle uscite)",
     "Liberatoria/waiver per i partecipanti se necessarie (vedere One Million Ride)",
     "Serve una forma giuridica? (es. ASD / tesseramento per coprire le ride)",
     "Permessi: ritrovo/suolo pubblico, musica del DJ (SIAE)",
-  ]],
-  ["Comunicazione & lancio", [
+  ]},
+  {n:'6', title:'Comunicazione & lancio', items:[
     "Mandare il messaggio di lancio (IG, Strava, sistemare sito)",
     "Data e ordine d\u2019uscita dei post IG (standby \u2014 layout e post con Enni)",
     "Aprire il gruppo WhatsApp della community|tbd",
     "Volantino + adesivi in bar / bike shop / palestre|tbd",
-  ]],
-  ["Giorno dell\u2019evento", [
+  ]},
+  {n:'7', title:'Giorno dell\u2019evento', items:[
     "Qualcuno dedicato a foto/video",
     "Punto di ritrovo riconoscibile",
     "Storia taggandoci \u2192 bidon in regalo // oppure: follow IG + iscritti gruppo Strava",
     "Regalare adesivi",
-  ]],
-  ["Dopo l\u2019evento", [
+  ]},
+  {n:'8', title:'Dopo l\u2019evento', items:[
     "Post IG di ringraziamento + recap (foto/video)",
-  ]],
-  ["Più avanti (crescita)", [
+  ]},
+  {n:'9', title:'Più avanti (crescita)', items:[
     "Calendario ride ricorrenti",
     "Pianificare la ride #002 / calendario uscite",
     "Collaborazioni (bike shop, bar, brand locali)",
     "Membership / tesseramento",
     "Ampliare il merch",
-  ]],
+  ]},
 ];
 
 let state = {};
@@ -131,35 +146,39 @@ function loadState(){
 function saveState(){
   try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
 }
+function isChecked(sec, id){
+  if(Object.prototype.hasOwnProperty.call(state, id)) return !!state[id];
+  return !!sec.done;
+}
 
 function render(){
   const list = document.getElementById('list');
   list.innerHTML = '';
-  DATA.forEach(([title, items], si)=>{
-    const sec = document.createElement('div'); sec.className='sec';
+  DATA.forEach(sec=>{
+    const wrap = document.createElement('div'); wrap.className = 'sec' + (sec.done?' done-sec':'');
     const head = document.createElement('div'); head.className='sec-head';
-    head.innerHTML = `<span class="num">${String(si+1).padStart(2,'0')}</span><span>${title}</span><span class="ln"></span>`;
-    sec.appendChild(head);
+    head.innerHTML = `<span class="num">${(sec.label||sec.n.padStart(2,'0'))}</span><span>${sec.title}</span><span class="ln"></span>`;
+    wrap.appendChild(head);
     const ul = document.createElement('ul');
-    items.forEach((raw, ii)=>{
-      const parts = raw.split('|');
-      const text = parts[0]; const opt = parts[1];
-      const id = `${si+1}.${ii+1}`;
+    sec.items.forEach((raw, ii)=>{
+      const parts = raw.split('|'); const text = parts[0]; const opt = parts[1];
+      const id = `${sec.n}.${ii+1}`;
       const li = document.createElement('li'); li.dataset.id = id;
-      if(state[id]) li.classList.add('done');
-      li.innerHTML = `<span class="box"></span><span class="id">${id}</span><span class="txt">${text}${opt?`<span class="opt">${opt}</span>`:''}</span>`;
-      li.addEventListener('click', ()=>{ state[id]=!state[id]; li.classList.toggle('done',!!state[id]); saveState(); updateProgress(); });
+      if(isChecked(sec,id)) li.classList.add('done');
+      const idLabel = sec.done ? '' : `<span class="id">${id}</span>`;
+      li.innerHTML = `<span class="box"></span>${idLabel}<span class="txt">${text}${opt?`<span class="opt">${opt}</span>`:''}</span>`;
+      li.addEventListener('click', ()=>{ const cur = isChecked(sec,id); state[id] = !cur; li.classList.toggle('done', !cur); saveState(); updateProgress(); });
       ul.appendChild(li);
     });
-    sec.appendChild(ul);
-    list.appendChild(sec);
+    wrap.appendChild(ul);
+    list.appendChild(wrap);
   });
   updateProgress();
 }
 
 function updateProgress(){
   let total=0, done=0;
-  DATA.forEach(([,items],si)=>items.forEach((_,ii)=>{ total++; if(state[`${si+1}.${ii+1}`]) done++; }));
+  DATA.forEach(sec=>sec.items.forEach((_,ii)=>{ total++; if(isChecked(sec, `${sec.n}.${ii+1}`)) done++; }));
   const pct = total? Math.round(done/total*100):0;
   document.getElementById('pct').textContent = pct+'%';
   document.getElementById('fill').style.width = pct+'%';
@@ -167,7 +186,10 @@ function updateProgress(){
 }
 
 document.getElementById('reset').addEventListener('click', ()=>{
-  if(confirm('Azzerare tutte le spunte?')){ state={}; saveState(); render(); }
+  if(confirm('Azzerare le spunte delle cose DA FARE? (Il blocco \u201cGià fatto\u201d resta)')){
+    DATA.forEach(sec=>{ if(!sec.done) sec.items.forEach((_,ii)=>{ delete state[`${sec.n}.${ii+1}`]; }); });
+    saveState(); render();
+  }
 });
 
 loadState();
