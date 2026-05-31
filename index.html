@@ -607,7 +607,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   text-transform: uppercase;
 }
 @media (max-width: 640px) {
-  #how { min-height: 100svh; padding: 96px 24px 40px; }
+  #how { min-height: 100svh; padding: 96px 24px 60px; }
   .how-grid { grid-template-columns: 1fr; }
   .how-col { padding: 32px 0; background: transparent; }
   .how-grid { background: transparent; gap: 1px; }
@@ -718,7 +718,6 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   margin: 0;
   display: block;
   white-space: nowrap;
-  text-shadow: 0 2px 30px rgba(240,237,232,0.95), 0 0 14px rgba(240,237,232,0.9);
 }
 .morethan-line { display: inline; }
 .mt-slot {
@@ -738,7 +737,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 @media (max-width: 768px) {
   #morethan { min-height: 70vh; padding: 80px 16px; }
-  .mt-bg img { width: 90%; max-width: 90vw; filter: blur(6px); opacity: 0.34; }
+  .mt-bg img { width: 90%; max-width: 90vw; filter: blur(3px); opacity: 0.42; }
   .morethan-title { font-size: 7.4vw; letter-spacing: 0.03em; }
 }
 
@@ -864,10 +863,11 @@ footer {
 }
 .footer-legal {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  margin-top: 30px;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 24px;
 }
 .footer-copy {
   color: var(--green-2);
@@ -877,11 +877,11 @@ footer {
   text-transform: uppercase;
   margin: 0;
 }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 18px; }
 .footer-links a {
   color: var(--green-2);
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
@@ -896,7 +896,9 @@ footer {
   .footer-logo img { height: 24px; }
   .footer-info { text-align: center; }
   .footer-social { gap: 24px; }
-  .footer-legal { flex-direction: column; gap: 10px; margin-top: 22px; text-align: center; }
+  .footer-legal { flex-direction: column; gap: 8px; margin-top: 22px; text-align: center; }
+  .footer-copy { font-size: 8px; }
+  .footer-links a { font-size: 7px; }
 }
 
 /* ── TEMA CHIARO: grana uniforme; foto con overlay leggibile + logo sfocato ── */
