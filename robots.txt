@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Merch non ancora pubblica
+Disallow: /merch
+Disallow: /tee
+Disallow: /bidon
+
+Sitemap: https://northsidecc.com/sitemap.xml
