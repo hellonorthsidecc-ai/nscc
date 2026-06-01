@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NSCC — GIF Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<style>
+  :root{--green-1:#4C5F49;--green-2:#6E7D66;--bg:#ECEEE9;--line:#cfd3cb;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#1b1d1a;color:#ECEEE9;font-family:'Space Mono',monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px 16px 60px;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:.04em;text-transform:uppercase;}
+  .preview{width:min(380px,86vw);border:1px solid #3a3d37;}
+  canvas{width:100%;height:auto;display:block;}
+  .panel{width:min(520px,92vw);display:flex;flex-direction:column;gap:12px;background:#23261f;border:1px solid #3a3d37;padding:16px;}
+  label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9AA696;display:block;margin-bottom:5px;}
+  input,select{width:100%;background:#15170f;border:1px solid #3a3d37;color:#ECEEE9;font-family:'Space Mono',monospace;font-size:13px;padding:9px 10px;}
+  .row{display:flex;gap:10px;}.row>div{flex:1;}
+  .btns{display:flex;gap:10px;margin-top:4px;}
+  button{flex:1;background:#4C5F49;border:none;color:#ECEEE9;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:13px;cursor:pointer;transition:.15s;}
+  button:hover{background:#6E7D66;}
+  button.ghost{background:transparent;border:1px solid #4C5F49;}
+  #status{font-size:11px;color:#9AA696;min-height:16px;letter-spacing:.05em;}
+  a#dl{display:none;text-align:center;background:#ECEEE9;color:#1b1d1a;text-decoration:none;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:13px;}
+</style>
+</head>
+<body>
+  <h1>NSCC · GIF Generator</h1>
+  <div class="preview"><canvas id="cv" width="1080" height="1350"></canvas></div>
+
+  <div class="panel">
+    <div>
+      <label>Riga 1 (scramble)</label>
+      <input id="l1" value="NORTHSIDE">
+    </div>
+    <div>
+      <label>Riga 2 (scramble)</label>
+      <input id="l2" value="CYCLING CLUB">
+    </div>
+    <div>
+      <label>Sottotitolo (mono)</label>
+      <input id="sub" value="A cycling club from the north of Italy.">
+    </div>
+    <div class="row">
+      <div>
+        <label>Riga in alto</label>
+        <input id="top" value="NSCC">
+      </div>
+      <div>
+        <label>In basso a destra</label>
+        <input id="topr" value="EST. 2026">
+      </div>
+    </div>
+    <div>
+      <label>Riga in basso (mono)</label>
+      <input id="foot" value="46°10′N · 09°52′E · Valtellina, IT">
+    </div>
+    <div class="row">
+      <div>
+        <label>Velocità GIF</label>
+        <select id="fps"><option value="20">Fluida (20 fps)</option><option value="14">Media (14 fps)</option><option value="10">Leggera (10 fps)</option></select>
+      </div>
+      <div>
+        <label>Risoluzione</label>
+        <select id="res"><option value="1080">1080×1350 (piena)</option><option value="720">720×900 (leggera)</option></select>
+      </div>
+    </div>
+    <div class="btns">
+      <button class="ghost" onclick="restart()">Rigioca anteprima</button>
+      <button id="gen" onclick="makeGif()">Genera GIF</button>
+    </div>
+    <div id="status"></div>
+    <a id="dl" download="nscc.gif">⬇ Scarica GIF</a>
+  </div>
+
+<script>
+const CHARS = '!<>_/[]=+*?#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const C = {bg:'#ECEEE9', g1:'#4C5F49', g2:'#6E7D66', line:'#cfd3cb'};
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+let fontsReady = false;
+
+async function ensureFonts(){
+  if(fontsReady) return;
+  try{
+    await document.fonts.load("700 200px 'Barlow Condensed'");
+    await document.fonts.load("400 30px 'Space Mono'");
+    await document.fonts.load("700 26px 'Space Mono'");
+    await document.fonts.ready;
+  }catch(e){}
+  fontsReady = true;
+}
+
+function vals(){
+  return {
+    l1:document.getElementById('l1').value,
+    l2:document.getElementById('l2').value,
+    sub:document.getElementById('sub').value,
+    top:document.getElementById('top').value,
+    topr:document.getElementById('topr').value,
+    foot:document.getElementById('foot').value,
+  };
+}
+
+// fit a Barlow Condensed size so the longest title line fits the width
+function fitTitleSize(lines, maxW){
+  let size = 190;
+  while(size > 60){
+    ctx.font = "700 "+size+"px 'Barlow Condensed'";
+    const track = size*0.02;
+    let ok = true;
+    for(const ln of lines){
+      let w = 0;
+      for(const ch of ln) w += ctx.measureText(ch).width + track;
+      if(w - track > maxW){ ok = false; break; }
+    }
+    if(ok) return size;
+    size -= 4;
+  }
+  return size;
+}
+
+function buildQueue(text){
+  const q=[];
+  for(let i=0;i<text.length;i++){
+    const start = Math.floor(Math.random()*18);
+    const end = start + Math.floor(Math.random()*18);
+    q.push({to:text[i], start, end, char:''});
+  }
+  return q;
+}
+function queueMaxEnd(q){ return q.reduce((m,it)=>Math.max(m,it.end),0); }
+
+// draw one scrambled title line; advances by FINAL glyph widths (stable layout)
+function drawLine(q, size, cx, cy){
+  ctx.font = "700 "+size+"px 'Barlow Condensed'";
+  ctx.textBaseline = 'alphabetic';
+  const track = size*0.02;
+  // total width by final chars
+  let total = 0;
+  for(const it of q) total += ctx.measureText(it.to).width + track;
+  total -= track;
+  let x = cx - total/2;
+  for(const it of q){
+    const fw = ctx.measureText(it.to).width;
+    let shown = it.to, type = 'final';
+    if(curFrame >= it.end){ shown = it.to; type='final'; }
+    else if(curFrame >= it.start){
+      if(!it.char || Math.random() < 0.28) it.char = CHARS[Math.floor(Math.random()*CHARS.length)];
+      shown = it.char; type='scramble';
+    } else { shown=''; type='blank'; }
+    if(shown){
+      ctx.fillStyle = (type==='final') ? C.g1 : C.g2;
+      ctx.globalAlpha = (type==='final') ? 1 : 0.35;
+      ctx.textAlign = 'left';
+      ctx.fillText(shown, x, cy);
+      ctx.globalAlpha = 1;
+    }
+    x += fw + track;
+  }
+}
+
+let Q1, Q2, MAXEND, curFrame=0;
+function prepare(){
+  const v = vals();
+  Q1 = buildQueue(v.l1);
+  Q2 = buildQueue(v.l2);
+  MAXEND = Math.max(queueMaxEnd(Q1), queueMaxEnd(Q2));
+}
+
+function drawFrame(){
+  const v = vals();
+  const W = cv.width, H = cv.height, M = W*0.083;
+  // bg
+  ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
+  // eyebrow top
+  ctx.font = "700 "+(W*0.024)+"px 'Space Mono'";
+  ctx.fillStyle = C.g2; ctx.textBaseline='alphabetic';
+  ctx.textAlign='left';  ctx.fillText(v.top.toUpperCase(),  M, H*0.085);
+  ctx.textAlign='right'; ctx.fillText(v.topr.toUpperCase(), W-M, H*0.085);
+  // title (two lines)
+  const size = fitTitleSize([v.l1, v.l2], W - 2*M);
+  const lh = size*0.96;
+  const blockMid = H*0.46;
+  drawLine(Q1, size, W/2, blockMid - lh*0.06);
+  drawLine(Q2, size, W/2, blockMid - lh*0.06 + lh);
+  // subline
+  ctx.font = "400 "+(W*0.0265)+"px 'Space Mono'";
+  ctx.fillStyle = C.g2; ctx.textAlign='center';
+  ctx.fillText(v.sub, W/2, blockMid + lh + H*0.055);
+  // footer
+  ctx.font = "400 "+(W*0.0225)+"px 'Space Mono'";
+  ctx.fillStyle = C.g2; ctx.textAlign='center';
+  ctx.fillText(v.foot, W/2, H*0.93);
+  ctx.textAlign='left';
+}
+
+// ── live preview loop (scramble → hold → restart) ──
+let lastTick=0, holding=0, previewOn=true;
+function loop(ts){
+  if(!previewOn) return;
+  if(ts - lastTick > 50){
+    lastTick = ts;
+    if(curFrame <= MAXEND + 2){ curFrame++; }
+    else { holding++; if(holding > 70){ holding=0; curFrame=0; prepare(); } }
+    drawFrame();
+  }
+  requestAnimationFrame(loop);
+}
+function restart(){ prepare(); curFrame=0; holding=0; }
+
+// ── GIF export ──
+async function makeGif(){
+  const st = document.getElementById('status');
+  const dl = document.getElementById('dl');
+  dl.style.display='none';
+  if(typeof GIF === 'undefined'){ st.textContent='Errore: libreria GIF non caricata (sei online?).'; return; }
+  document.getElementById('gen').disabled = true;
+  previewOn = false;
+  st.textContent = 'Preparo i font…';
+  await ensureFonts();
+
+  const fps = parseInt(document.getElementById('fps').value,10);
+  const res = parseInt(document.getElementById('res').value,10);
+  cv.width = res; cv.height = Math.round(res*1.25);
+  const delay = Math.round(1000/fps);
+
+  st.textContent = 'Carico il worker…';
+  let workerURL;
+  try{
+    const r = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
+    workerURL = URL.createObjectURL(await r.blob());
+  }catch(e){ st.textContent='Errore caricando il worker GIF (connessione?).'; reset(); return; }
+
+  const gif = new GIF({workers:2, quality:8, width:cv.width, height:cv.height, workerScript:workerURL, background:C.bg, dither:false});
+
+  prepare();
+  const scrambleFrames = MAXEND + 3;
+  const holdFrames = Math.round(fps*1.4);
+  st.textContent = 'Disegno i frame…';
+  for(let f=0; f<scrambleFrames; f++){ curFrame=f; drawFrame(); gif.addFrame(ctx,{copy:true,delay}); }
+  curFrame = MAXEND + 999; // fully resolved
+  for(let h=0; h<holdFrames; h++){ drawFrame(); gif.addFrame(ctx,{copy:true,delay: h===holdFrames-1 ? delay*6 : delay}); }
+
+  gif.on('progress', p => { st.textContent = 'Comprimo la GIF… '+Math.round(p*100)+'%'; });
+  gif.on('finished', blob => {
+    const url = URL.createObjectURL(blob);
+    dl.href = url;
+    dl.download = (vals().l1 || 'nscc').toLowerCase().replace(/[^a-z0-9]+/g,'_')+'.gif';
+    dl.style.display='block';
+    st.textContent = 'Fatto! ('+(blob.size/1048576).toFixed(1)+' MB) — clicca per scaricare.';
+    reset();
+    // restore preview size
+    cv.width=1080; cv.height=1350; previewOn=true; restart(); requestAnimationFrame(loop);
+  });
+  gif.render();
+}
+function reset(){ document.getElementById('gen').disabled=false; }
+
+(async function init(){
+  await ensureFonts();
+  prepare();
+  drawFrame();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
