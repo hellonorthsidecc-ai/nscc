@@ -151,7 +151,8 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 .pd-back:hover { color: var(--green-1); }
 .pd-grid { display: flex; gap: 64px; align-items: flex-start; }
 .pd-media {
-  flex: 0 0 46%;
+  flex: 0 0 340px;
+  max-width: 340px;
   aspect-ratio: 4 / 5;
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
@@ -187,7 +188,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 @media (max-width: 768px) {
   .pd { padding: 100px 24px 70px 24px; }
   .pd-grid { flex-direction: column; gap: 36px; }
-  .pd-media { flex: none; width: 100%; aspect-ratio: 1 / 1; padding: 10%; }
+  .pd-media { flex: none; width: 100%; max-width: none; aspect-ratio: 1 / 1; padding: 10%; }
   .pd-back { margin-bottom: 32px; }
   .pd-name { font-size: clamp(2.4em, 11vw, 3.6em); }
 }
