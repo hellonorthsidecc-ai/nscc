@@ -1022,7 +1022,7 @@ body{ background:transparent; }
 .place-tl{position:absolute;top:26px;left:30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2);text-shadow:0 1px 3px rgba(240,237,232,.7)}
 .place-attr{position:absolute;bottom:14px;right:16px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-2);opacity:.6}
 .place-copy{position:absolute;inset:0;display:flex;align-items:center;z-index:6;pointer-events:none}
-.place-copy-in{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;text-align:center}
+.place-copy-in{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;text-align:center;transform:translateY(22px)}
 .place-ey{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--green-2);opacity:0}
 .place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:14px 0 18px}
 .place-h .ln1{display:block;color:var(--green-1);opacity:0}
@@ -1040,7 +1040,7 @@ body{ background:transparent; }
 .place-scrolly.flat .place-copy-in{padding:120px 40px}
 .place-scrolly.flat .place-ey,.place-scrolly.flat .place-h .ln1,.place-scrolly.flat .place-p,.place-scrolly.flat .place-meta{opacity:1}
 .place-scrolly.flat .place-h .ln2{opacity:1;color:var(--green-1)}
-@media (max-width:640px){ .place-copy-in{padding:0 22px} .place-h{font-size:clamp(40px,12.5vw,70px);margin:12px 0 14px} .place-coords{font-size:12px;letter-spacing:.18em} .place-p{font-size:13px;line-height:1.85;margin-top:18px} .place-meta{gap:22px;margin-top:30px;padding-top:22px} .place-meta b{font-size:18px} .place-ey{font-size:10px} .place-tl{left:20px} }
+@media (max-width:640px){ .place-copy-in{padding:0 22px;transform:translateY(7vh)} .place-h{font-size:clamp(40px,12.5vw,70px);margin:12px 0 14px} .place-coords{font-size:12px;letter-spacing:.18em} .place-p{font-size:13px;line-height:1.85;margin-top:18px} .place-meta{gap:22px;margin-top:30px;padding-top:22px} .place-meta b{font-size:18px} .place-ey{font-size:10px} .place-tl{left:20px} }
 
 </style>
 </head>
@@ -1132,12 +1132,7 @@ body{ background:transparent; }
           <h2 class="place-h"><span class="ln1" id="pl-ln1">Born in</span><span class="ln2" id="pl-name">Valtellina</span></h2>
           <div class="place-coords" id="place-coords">46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</div>
           <p class="place-p" id="pl-p1">We ride where Lake Como runs into the Alps &#8212; long valley roads, quiet climbs and the passes that wrote cycling history: Stelvio, Gavia, Mortirolo, all from our doorstep.</p>
-          <p class="place-p" id="pl-p2">No membership fees, no hierarchy. Just people who love rides and community, from the north of Italy.</p>
-          <div class="place-meta" id="pl-meta">
-            <div><span>Region</span><b>Valtellina, IT</b></div>
-            <div><span>Base</span><b>Sondrio</b></div>
-            <div><span>Since</span><b>Est. 2026</b></div>
-          </div>
+          <div class="place-meta" id="pl-meta"></div>
         </div>
       </div>
     </div>
@@ -1575,7 +1570,7 @@ function handleSubmit(e) {
   var stickyEl=scrolly.querySelector('.place-sticky');
   var nameEl=document.getElementById('pl-name');
   var ey=document.getElementById('pl-ey'), ln1=document.getElementById('pl-ln1');
-  var p1=document.getElementById('pl-p1'), p2=document.getElementById('pl-p2'), meta=document.getElementById('pl-meta');
+  var p1=document.getElementById('pl-p1'), meta=document.getElementById('pl-meta');
   var coordsEl=document.getElementById('place-coords');
   var GREEN='#4B5F49';
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1604,7 +1599,7 @@ function handleSubmit(e) {
   function computeEZ(){
     var w=window.innerWidth;
     if(w>=900) return 8.6;
-    return clamp(8.6-(900-w)/620, 7.5, 8.6);
+    return clamp(8.6-(900-w)/360, 6.8, 8.6);
   }
   var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false;
 
@@ -1651,7 +1646,7 @@ function handleSubmit(e) {
     nameEl.style.textShadow='0 2px 18px rgba(0,0,0,'+(0.45*(1-df))+')';
     coordsEl.style.color=mix(df);
     coordsEl.style.textShadow='0 1px 10px rgba(0,0,0,'+(0.5*(1-df))+')';
-    ey.style.opacity=df; ln1.style.opacity=df; p1.style.opacity=df; p2.style.opacity=df; meta.style.opacity=df;
+    ey.style.opacity=df; ln1.style.opacity=df; p1.style.opacity=df; meta.style.opacity=df;
   }
   function tick(){
     curP+=(targetP-curP)*0.14;
