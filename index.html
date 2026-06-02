@@ -1598,7 +1598,7 @@ function handleSubmit(e) {
     if(w>=900) return 8.6;
     return clamp(8.6-(900-w)/360, 6.8, 8.6);
   }
-  var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false,lastSat=null;
+  var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false,lastSat=null,lastRO=null;
 
   function addValt(geo){
     if(!map||map.getSource('valt'))return;
@@ -1639,7 +1639,13 @@ function handleSubmit(e) {
     map.jumpTo({center:[lon,CC[1]],zoom:zoom,pitch:0,bearing:0});
     if(sat!==lastSat){ map.setPaintProperty('sat','raster-saturation',sat); lastSat=sat; }
     var df=clamp((p-0.72)/0.16,0,1);
-    stage.style.opacity=1-df;
+    var rO=1-df;
+    if(rO!==lastRO){
+      map.setPaintProperty('sat','raster-opacity',rO);
+      map.setPaintProperty('hill','hillshade-shadow-color','rgba(58,58,58,'+rO+')');
+      map.setPaintProperty('hill','hillshade-highlight-color','rgba(255,255,255,'+rO+')');
+      lastRO=rO;
+    }
     nameEl.style.opacity=Math.max(rp,df);
     nameEl.style.color=mix(df);
     nameEl.style.textShadow='0 2px 18px rgba(0,0,0,'+(0.45*(1-df))+')';
