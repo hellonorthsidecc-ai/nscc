@@ -1598,7 +1598,7 @@ function handleSubmit(e) {
     if(w>=900) return 8.6;
     return clamp(8.6-(900-w)/360, 6.8, 8.6);
   }
-  var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false;
+  var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false,lastSat=null;
 
   function addValt(geo){
     if(!map||map.getSource('valt'))return;
@@ -1624,18 +1624,20 @@ function handleSubmit(e) {
   function apply(p){
     if(!ready) return;
     var SZ=computeSZ(), EZ=computeEZ();
-    var lon, zoom, rp;
+    var lon, zoom, rp, sat;
     if(p<0.12){
       var hp=smooth(p/0.12);
       lon=CC[0]-22*(1-hp); zoom=SZ;
-      coordsEl.textContent=fmt(DS[0],DS[1]); rp=0; setGreen(0);
+      coordsEl.textContent=fmt(DS[0],DS[1]); rp=0; setGreen(0); sat=0;
     } else {
       var zfrac=clamp((p-0.12)/0.5,0,1), zp=smooth(zfrac);
       lon=CC[0]; zoom=lerp(SZ,EZ,zp);
       coordsEl.textContent=fmt(lerp(DS[0],DE[0],zp),lerp(DS[1],DE[1],zp));
       rp=clamp((zfrac-0.55)/0.45,0,1); setGreen(rp);
+      sat=-smooth(clamp(zfrac/0.7,0,1));
     }
     map.jumpTo({center:[lon,CC[1]],zoom:zoom,pitch:0,bearing:0});
+    if(sat!==lastSat){ map.setPaintProperty('sat','raster-saturation',sat); lastSat=sat; }
     var df=clamp((p-0.72)/0.16,0,1);
     stage.style.opacity=1-df;
     nameEl.style.opacity=Math.max(rp,df);
@@ -1663,7 +1665,7 @@ function handleSubmit(e) {
         },
         layers:[
           {id:'bg',type:'background',paint:{'background-color':'#F0EDE8','background-opacity':0}},
-          {id:'sat',type:'raster',source:'sat',paint:{'raster-saturation':-1,'raster-contrast':0.1,'raster-brightness-min':0.05}},
+          {id:'sat',type:'raster',source:'sat',paint:{'raster-saturation':0,'raster-contrast':0.1,'raster-brightness-min':0.05}},
           {id:'hill',type:'hillshade',source:'dem',paint:{'hillshade-exaggeration':0.55,'hillshade-shadow-color':'#3a3a3a','hillshade-highlight-color':'#fff'}}
         ],
         terrain:{source:'dem',exaggeration:1.5}},
