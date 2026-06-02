@@ -1014,8 +1014,8 @@ body{ background:transparent; }
 
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
 #place{position:relative}
-.place-scrolly{position:relative;height:300vh}
-.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:transparent}
+.place-scrolly{position:relative;height:240vh}
+.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background-color:var(--bg);background-image:var(--grain);background-repeat:repeat}
 .place-stage{position:absolute;inset:0;will-change:opacity}
 .place-map{position:absolute;inset:0}
 .place-hud{position:absolute;inset:0;pointer-events:none}
@@ -1027,7 +1027,7 @@ body{ background:transparent; }
 .place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:14px 0 18px}
 .place-h .ln1{display:block;color:var(--green-1);opacity:0}
 .place-h .ln2{display:block;color:#F0EDE8;opacity:0}
-.place-coords{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.28em;color:var(--green-1);text-shadow:0 1px 3px rgba(240,237,232,.9),0 0 10px rgba(240,237,232,.6)}
+.place-coords{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.28em;color:var(--green-1)}
 .place-p{font-size:14px;line-height:2;letter-spacing:.03em;color:var(--green-1);max-width:600px;margin:24px auto 0;opacity:0}
 .place-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin:42px auto 0;border-top:1px solid var(--line);padding-top:28px;max-width:680px;opacity:0}
 .place-meta div{display:flex;flex-direction:column;gap:6px}
@@ -1631,6 +1631,8 @@ function handleSubmit(e) {
     nameEl.style.opacity=Math.max(rp,df);
     nameEl.style.color=mix(df);
     nameEl.style.textShadow='0 2px 18px rgba(0,0,0,'+(0.45*(1-df))+')';
+    coordsEl.style.color=mix(df);
+    coordsEl.style.textShadow='0 1px 10px rgba(0,0,0,'+(0.5*(1-df))+')';
     ey.style.opacity=df; ln1.style.opacity=df; p1.style.opacity=df; p2.style.opacity=df; meta.style.opacity=df;
   }
   function tick(){
