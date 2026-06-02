@@ -1015,29 +1015,31 @@ body{ background:transparent; }
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
 #place{position:relative}
 .place-scrolly{position:relative;height:300vh}
-.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg)}
+.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:transparent}
 .place-stage{position:absolute;inset:0;will-change:opacity}
 .place-map{position:absolute;inset:0}
 .place-hud{position:absolute;inset:0;pointer-events:none}
-.place-tl{position:absolute;top:26px;left:30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2);text-shadow:0 1px 2px rgba(240,237,232,.7)}
+.place-tl{position:absolute;top:26px;left:30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2);text-shadow:0 1px 3px rgba(240,237,232,.7)}
 .place-attr{position:absolute;bottom:14px;right:16px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-2);opacity:.6}
-.place-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:0}
-.place-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,128px);line-height:.9;letter-spacing:.04em;text-transform:uppercase;color:#F0EDE8;text-shadow:0 2px 20px rgba(0,0,0,.5)}
-.place-coords{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.28em;color:#F0EDE8;margin-top:12px;text-shadow:0 1px 12px rgba(0,0,0,.55)}
-.place-copy{position:absolute;inset:0;background:var(--bg);display:flex;align-items:center;opacity:0;z-index:6;will-change:opacity}
-.place-copy-in{max-width:1000px;margin:0 auto;padding:0 40px;width:100%}
-.place-ey{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--green-2)}
-.place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:16px 0 28px;color:var(--green-1)}
-.place-p{font-size:14px;line-height:2;letter-spacing:.03em;color:var(--green-1);max-width:600px;margin-bottom:20px}
-.place-meta{display:flex;flex-wrap:wrap;gap:40px;margin-top:40px;border-top:1px solid var(--line);padding-top:28px}
+.place-copy{position:absolute;inset:0;display:flex;align-items:center;z-index:6;pointer-events:none}
+.place-copy-in{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;text-align:center}
+.place-ey{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--green-2);opacity:0}
+.place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:14px 0 18px}
+.place-h .ln1{display:block;color:var(--green-1);opacity:0}
+.place-h .ln2{display:block;color:#F0EDE8;opacity:0}
+.place-coords{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.28em;color:var(--green-1);text-shadow:0 1px 3px rgba(240,237,232,.9),0 0 10px rgba(240,237,232,.6)}
+.place-p{font-size:14px;line-height:2;letter-spacing:.03em;color:var(--green-1);max-width:600px;margin:24px auto 0;opacity:0}
+.place-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin:42px auto 0;border-top:1px solid var(--line);padding-top:28px;max-width:680px;opacity:0}
 .place-meta div{display:flex;flex-direction:column;gap:6px}
 .place-meta span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2)}
 .place-meta b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--green-1)}
 .place-scrolly.flat{height:auto}
-.place-scrolly.flat .place-sticky{position:relative;height:auto}
+.place-scrolly.flat .place-sticky{position:relative;height:auto;background:transparent}
 .place-scrolly.flat .place-stage{display:none}
-.place-scrolly.flat .place-copy{position:relative;opacity:1}
-.place-scrolly.flat .place-copy-in{padding:110px 40px}
+.place-scrolly.flat .place-copy{position:relative}
+.place-scrolly.flat .place-copy-in{padding:120px 40px}
+.place-scrolly.flat .place-ey,.place-scrolly.flat .place-h .ln1,.place-scrolly.flat .place-p,.place-scrolly.flat .place-meta{opacity:1}
+.place-scrolly.flat .place-h .ln2{opacity:1;color:var(--green-1)}
 @media (max-width:640px){ .place-copy-in{padding:0 24px} .place-meta{gap:24px} .place-tl{left:20px} }
 
 </style>
@@ -1122,23 +1124,19 @@ body{ background:transparent; }
         <div class="place-map" id="place-map"></div>
         <div class="place-hud">
           <span class="place-tl">Northside Cycling Club</span>
-          <div class="place-center" id="place-center">
-            <div class="place-name">Valtellina</div>
-            <div class="place-coords" id="place-coords">46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</div>
-          </div>
           <span class="place-attr">Imagery &copy; Esri &#183; Terrain &copy; AWS</span>
         </div>
       </div>
       <div class="place-copy" id="place-copy">
         <div class="place-copy-in">
-          <p class="place-ey">The place</p>
-          <h2 class="place-h">Born in<br>Valtellina</h2>
-          <p class="place-p">We ride where Lake Como runs into the Alps &#8212; long valley roads, quiet climbs and the passes that wrote cycling history: Stelvio, Gavia, Mortirolo, all from our doorstep.</p>
-          <p class="place-p">No membership fees, no hierarchy. Just people who love rides and community, from the north of Italy.</p>
-          <div class="place-meta">
+          <p class="place-ey" id="pl-ey">The place</p>
+          <h2 class="place-h"><span class="ln1" id="pl-ln1">Born in</span><span class="ln2" id="pl-name">Valtellina</span></h2>
+          <div class="place-coords" id="place-coords">46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</div>
+          <p class="place-p" id="pl-p1">We ride where Lake Como runs into the Alps &#8212; long valley roads, quiet climbs and the passes that wrote cycling history: Stelvio, Gavia, Mortirolo, all from our doorstep.</p>
+          <p class="place-p" id="pl-p2">No membership fees, no hierarchy. Just people who love rides and community, from the north of Italy.</p>
+          <div class="place-meta" id="pl-meta">
             <div><span>Region</span><b>Valtellina, IT</b></div>
             <div><span>Base</span><b>Sondrio</b></div>
-            <div><span>Coordinates</span><b>46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</b></div>
             <div><span>Since</span><b>Est. 2026</b></div>
           </div>
         </div>
@@ -1575,8 +1573,9 @@ function handleSubmit(e) {
   var scrolly=document.getElementById('place-scrolly');
   if(!scrolly) return;
   var stage=document.getElementById('place-stage');
-  var copyEl=document.getElementById('place-copy');
-  var centerEl=document.getElementById('place-center');
+  var nameEl=document.getElementById('pl-name');
+  var ey=document.getElementById('pl-ey'), ln1=document.getElementById('pl-ln1');
+  var p1=document.getElementById('pl-p1'), p2=document.getElementById('pl-p2'), meta=document.getElementById('pl-meta');
   var coordsEl=document.getElementById('place-coords');
   var GREEN='#4B5F49';
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1585,6 +1584,7 @@ function handleSubmit(e) {
   function smooth(t){return t*t*(3-2*t);}
   function dm(v){var a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);if(m===60){d++;m=0;}return String(d).padStart(2,'0')+'\u00B0'+String(m).padStart(2,'0')+'\u2032';}
   function fmt(lat,lon){while(lon>180)lon-=360;while(lon<-180)lon+=360;return dm(lat)+(lat>=0?'N':'S')+' \u00B7 '+dm(lon)+(lon>=0?'E':'W');}
+  function mix(t){var c=[240,237,232],g=[75,95,73];return 'rgb('+Math.round(lerp(c[0],g[0],t))+','+Math.round(lerp(c[1],g[1],t))+','+Math.round(lerp(c[2],g[2],t))+')';}
 
   if(reduce){ scrolly.classList.add('flat'); coordsEl.textContent=fmt(46.17,9.87); return; }
 
@@ -1614,22 +1614,24 @@ function handleSubmit(e) {
   function setGreen(o){ if(valtReady){map.setPaintProperty('valt-fill','fill-opacity',0.66*o);map.setPaintProperty('valt-glow','line-opacity',0.6*o);map.setPaintProperty('valt-line','line-opacity',o);} }
   function apply(p){
     if(!ready) return;
-    var lon, zoom;
+    var lon, zoom, rp;
     if(p<0.12){
       var hp=smooth(p/0.12);
       lon=CC[0]-22*(1-hp); zoom=SZ;
-      coordsEl.textContent=fmt(DS[0],DS[1]); centerEl.style.opacity=0; setGreen(0);
+      coordsEl.textContent=fmt(DS[0],DS[1]); rp=0; setGreen(0);
     } else {
       var zfrac=clamp((p-0.12)/0.5,0,1), zp=smooth(zfrac);
       lon=CC[0]; zoom=lerp(SZ,EZ,zp);
       coordsEl.textContent=fmt(lerp(DS[0],DE[0],zp),lerp(DS[1],DE[1],zp));
-      var rp=clamp((zfrac-0.55)/0.45,0,1);
-      centerEl.style.opacity=rp; setGreen(rp);
+      rp=clamp((zfrac-0.55)/0.45,0,1); setGreen(rp);
     }
     map.jumpTo({center:[lon,CC[1]],zoom:zoom,pitch:0,bearing:0});
     var df=clamp((p-0.72)/0.16,0,1);
     stage.style.opacity=1-df;
-    copyEl.style.opacity=df;
+    nameEl.style.opacity=Math.max(rp,df);
+    nameEl.style.color=mix(df);
+    nameEl.style.textShadow='0 2px 18px rgba(0,0,0,'+(0.45*(1-df))+')';
+    ey.style.opacity=df; ln1.style.opacity=df; p1.style.opacity=df; p2.style.opacity=df; meta.style.opacity=df;
   }
   function tick(){
     curP+=(targetP-curP)*0.14;
@@ -1648,11 +1650,11 @@ function handleSubmit(e) {
           dem:{type:'raster-dem',tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],encoding:'terrarium',tileSize:256,maxzoom:15,attribution:''}
         },
         layers:[
-          {id:'bg',type:'background',paint:{'background-color':'#F0EDE8'}},
+          {id:'bg',type:'background',paint:{'background-color':'#F0EDE8','background-opacity':0}},
           {id:'sat',type:'raster',source:'sat',paint:{'raster-saturation':-1,'raster-contrast':0.1,'raster-brightness-min':0.05}},
           {id:'hill',type:'hillshade',source:'dem',paint:{'hillshade-exaggeration':0.55,'hillshade-shadow-color':'#3a3a3a','hillshade-highlight-color':'#fff'}}
         ],
-        terrain:{source:'dem',exaggeration:1.5}, sky:{}},
+        terrain:{source:'dem',exaggeration:1.5}},
       center:[CC[0]-22,CC[1]], zoom:SZ, pitch:0, bearing:0,
       interactive:false, attributionControl:false, maxPitch:80
     });
