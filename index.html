@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet">
 <style>
 
 :root{
@@ -1010,6 +1011,33 @@ html{ background-color:var(--bg); background-image:var(--grain); background-repe
 body{ background:transparent; }
 #hero::after, #manifesto::after{ background-color:rgba(240,237,232,0.82); }
 #upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
+
+/* ── THE PLACE (scroll-driven map) ── */
+#place{position:relative}
+.place-scrolly{position:relative;height:260vh}
+.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:#0c0d0c;will-change:opacity}
+.place-map{position:absolute;inset:0}
+.place-hud{position:absolute;inset:0;z-index:4;pointer-events:none}
+.place-tl{position:absolute;top:26px;left:30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#fff;opacity:.85;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.place-attr{position:absolute;bottom:14px;right:16px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;opacity:.4}
+.place-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:0}
+.place-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,128px);line-height:.9;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+.place-coords{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.28em;color:#fff;margin-top:12px;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.place-copy{padding:140px 40px;max-width:1000px;margin:0 auto}
+.place-ey{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--green-2)}
+.place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:18px 0 30px;color:var(--green-1)}
+.place-p{font-size:14px;line-height:2;letter-spacing:.03em;color:var(--green-1);max-width:600px;margin-bottom:22px}
+.place-meta{display:flex;flex-wrap:wrap;gap:40px;margin-top:42px;border-top:1px solid var(--line);padding-top:30px}
+.place-meta div{display:flex;flex-direction:column;gap:6px}
+.place-meta span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2)}
+.place-meta b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--green-1)}
+.place-copy .pl-up{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.place-copy .pl-up.in{opacity:1;transform:none}
+.place-scrolly.flat{height:100vh}
+.place-scrolly.flat .place-sticky{position:relative}
+@media (max-width:640px){ .place-copy{padding:90px 24px} .place-meta{gap:26px} .place-tl{left:20px} }
+@media (prefers-reduced-motion: reduce){ .place-copy .pl-up{opacity:1;transform:none;transition:none} }
+
 </style>
 </head>
 <body>
@@ -1080,6 +1108,35 @@ body{ background:transparent; }
     <div class="event-right">
       <p class="event-meta">Summer 2026<br>Sondrio, IT</p>
       <a class="event-btn" href="https://strava.app.link/X5CV69eqA3b" target="_blank">Join us on Strava →</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE PLACE -->
+<section id="place">
+  <div class="place-scrolly" id="place-scrolly">
+    <div class="place-sticky" id="place-sticky">
+      <div class="place-map" id="place-map"></div>
+      <div class="place-hud">
+        <span class="place-tl">Northside Cycling Club</span>
+        <div class="place-center" id="place-center">
+          <div class="place-name">Valtellina</div>
+          <div class="place-coords" id="place-coords">46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</div>
+        </div>
+        <span class="place-attr">Imagery &copy; Esri &#183; Terrain &copy; AWS</span>
+      </div>
+    </div>
+  </div>
+  <div class="place-copy">
+    <p class="place-ey pl-up">The place</p>
+    <h2 class="place-h pl-up">Born in<br>Valtellina</h2>
+    <p class="place-p pl-up">We ride where Lake Como runs into the Alps &#8212; long valley roads, quiet climbs and the passes that wrote cycling history: Stelvio, Gavia, Mortirolo, all from our doorstep.</p>
+    <p class="place-p pl-up">No membership fees, no hierarchy. Just people who love rides and community, from the north of Italy.</p>
+    <div class="place-meta pl-up">
+      <div><span>Region</span><b>Valtellina, IT</b></div>
+      <div><span>Base</span><b>Sondrio</b></div>
+      <div><span>Coordinates</span><b>46&#176;10&#8242;N &#183; 09&#176;52&#8242;E</b></div>
+      <div><span>Since</span><b>Est. 2026</b></div>
     </div>
   </div>
 </section>
@@ -1506,5 +1563,96 @@ function handleSubmit(e) {
   })();
 </script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "dbceef87b14b4a93b49bb02aa89afe02"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+<script>
+(function(){
+  var scrolly=document.getElementById('place-scrolly');
+  if(!scrolly) return;
+  var sticky=document.getElementById('place-sticky');
+  var centerEl=document.getElementById('place-center');
+  var coordsEl=document.getElementById('place-coords');
+  var GREEN='#4B5F49';
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function clamp(v,a,b){return v<a?a:v>b?b:v;}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function smooth(t){return t*t*(3-2*t);}
+  function dm(v){var a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);if(m===60){d++;m=0;}return String(d).padStart(2,'0')+'\u00B0'+String(m).padStart(2,'0')+'\u2032';}
+  function fmt(lat,lon){while(lon>180)lon-=360;while(lon<-180)lon+=360;return dm(lat)+(lat>=0?'N':'S')+' \u00B7 '+dm(lon)+(lon>=0?'E':'W');}
+  var CC=[9.90,46.26], SZ=1.4, EZ=8.6, DS=[42.0,9.2], DE=[46.17,9.87];
+  var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false;
+
+  function addValt(geo){
+    if(!map||map.getSource('valt'))return;
+    map.addSource('valt',{type:'geojson',data:geo});
+    map.addLayer({id:'valt-fill',type:'fill',source:'valt',paint:{'fill-color':GREEN,'fill-opacity':0}});
+    map.addLayer({id:'valt-glow',type:'line',source:'valt',paint:{'line-color':GREEN,'line-width':8,'line-blur':4,'line-opacity':0}});
+    map.addLayer({id:'valt-line',type:'line',source:'valt',paint:{'line-color':GREEN,'line-width':3.5,'line-opacity':0}});
+    valtReady=true; apply(curP);
+  }
+  function loadValt(){
+    fetch('https://cdn.jsdelivr.net/gh/openpolis/geojson-italy/geojson/limits_IT_provinces.geojson')
+      .then(function(r){return r.json();}).then(function(fc){
+        var f=fc.features.filter(function(x){var p=x.properties||{};return (p.prov_name||p.DEN_UTS||'')==='Sondrio';})[0];
+        if(f) addValt(f);
+      }).catch(function(){});
+  }
+  function progress(){
+    var top=scrolly.offsetTop, total=scrolly.offsetHeight-window.innerHeight;
+    return clamp((window.pageYOffset-top)/total,0,1);
+  }
+  function apply(p){
+    if(!ready) return;
+    var pz=Math.min(p/0.82,1), zp=smooth(pz);
+    map.jumpTo({center:CC,zoom:lerp(SZ,EZ,zp),pitch:0,bearing:0});
+    coordsEl.textContent=fmt(lerp(DS[0],DE[0],zp),lerp(DS[1],DE[1],zp));
+    var rp=clamp((pz-0.6)/0.4,0,1);
+    centerEl.style.opacity=rp;
+    if(valtReady){ map.setPaintProperty('valt-fill','fill-opacity',0.66*rp); map.setPaintProperty('valt-glow','line-opacity',0.6*rp); map.setPaintProperty('valt-line','line-opacity',rp); }
+    sticky.style.opacity=1-clamp((p-0.82)/0.18,0,1);
+  }
+  function tick(){
+    curP+=(targetP-curP)*0.14;
+    if(Math.abs(targetP-curP)<0.0006) curP=targetP;
+    apply(curP);
+    if(curP!==targetP) requestAnimationFrame(tick); else running=false;
+  }
+  function onScroll(){ if(!ready)return; targetP=progress(); if(!running){running=true;requestAnimationFrame(tick);} }
+
+  function buildMap(){
+    map=new maplibregl.Map({
+      container:'place-map',
+      style:{version:8,projection:{type:'globe'},
+        sources:{
+          sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,maxzoom:18,attribution:''},
+          dem:{type:'raster-dem',tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],encoding:'terrarium',tileSize:256,maxzoom:15,attribution:''}
+        },
+        layers:[
+          {id:'bg',type:'background',paint:{'background-color':'#0c0d0c'}},
+          {id:'sat',type:'raster',source:'sat',paint:{'raster-saturation':-1,'raster-contrast':0.12,'raster-brightness-min':0.04}},
+          {id:'hill',type:'hillshade',source:'dem',paint:{'hillshade-exaggeration':0.55,'hillshade-shadow-color':'#000','hillshade-highlight-color':'#fff'}}
+        ],
+        terrain:{source:'dem',exaggeration:1.5}, sky:{}},
+      center:CC, zoom:SZ, pitch:0, bearing:0,
+      interactive:false, attributionControl:false, maxPitch:80
+    });
+    map.on('load',function(){
+      ready=true; loadValt();
+      if(reduce){ scrolly.classList.add('flat'); map.jumpTo({center:CC,zoom:EZ,pitch:0,bearing:0}); coordsEl.textContent=fmt(DE[0],DE[1]); centerEl.style.opacity=1; setTimeout(function(){ if(valtReady){map.setPaintProperty('valt-fill','fill-opacity',0.66);map.setPaintProperty('valt-glow','line-opacity',0.6);map.setPaintProperty('valt-line','line-opacity',1);} },400); return; }
+      targetP=curP=progress(); apply(curP);
+      window.addEventListener('scroll',onScroll,{passive:true});
+      window.addEventListener('resize',onScroll);
+    });
+  }
+  function init(){
+    if(typeof maplibregl==='undefined'){ setTimeout(init,150); return; }
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!built){built=true;buildMap();} }); },{rootMargin:'700px 0px'});
+    io.observe(scrolly);
+  }
+  init();
+
+  var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.2});
+  document.querySelectorAll('#place .place-copy .pl-up').forEach(function(el){ io2.observe(el); });
+})();
+</script>
 </body>
 </html>
