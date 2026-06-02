@@ -1123,7 +1123,6 @@ body{ background:transparent; }
       <div class="place-stage" id="place-stage">
         <div class="place-map" id="place-map"></div>
         <div class="place-hud">
-          <span class="place-tl">Northside Cycling Club</span>
           <span class="place-attr">Imagery &copy; Esri &#183; Terrain &copy; AWS</span>
         </div>
       </div>
@@ -1589,7 +1588,7 @@ function handleSubmit(e) {
 
   if(reduce){ scrolly.classList.add('flat'); coordsEl.textContent=fmt(46.17,9.87); return; }
 
-  var CC=[9.90,46.26], EZ=8.6, DS=[42.0,9.2], DE=[46.17,9.87];
+  var CC=[9.90,46.26], DS=[42.0,9.2], DE=[46.17,9.87];
   // Start zoom responsive: desktop unchanged (2.2); on mobile/tablet the globe
   // is sized so its diameter is ~82% of the smaller viewport side, so it never
   // overflows the screen edges. Globe diameter at zoom z is approx (512/pi)*2^z px.
@@ -1599,6 +1598,13 @@ function handleSubmit(e) {
     var side=Math.min(w, window.innerHeight);
     var z=Math.log(0.82*side*Math.PI/512)/Math.LN2;
     return clamp(z,0.4,2.2);
+  }
+  // End zoom responsive: desktop unchanged (8.6); on narrow screens it ends a
+  // bit lower so the whole Valtellina province stays inside the frame.
+  function computeEZ(){
+    var w=window.innerWidth;
+    if(w>=900) return 8.6;
+    return clamp(8.6-(900-w)/620, 7.5, 8.6);
   }
   var map=null,built=false,ready=false,valtReady=false,targetP=0,curP=0,running=false;
 
@@ -1625,7 +1631,7 @@ function handleSubmit(e) {
   function setGreen(o){ if(valtReady){map.setPaintProperty('valt-fill','fill-opacity',0.66*o);map.setPaintProperty('valt-glow','line-opacity',0.6*o);map.setPaintProperty('valt-line','line-opacity',o);} }
   function apply(p){
     if(!ready) return;
-    var SZ=computeSZ();
+    var SZ=computeSZ(), EZ=computeEZ();
     var lon, zoom, rp;
     if(p<0.12){
       var hp=smooth(p/0.12);
