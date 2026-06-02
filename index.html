@@ -82,7 +82,7 @@ body::after{
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 0; }
-body { background-color: var(--bg); background-image: var(--grain); background-repeat: repeat; color: var(--green-1); font-family: 'Space Mono', monospace; overflow-x: hidden; }
+body { background-color: var(--bg); background-image: var(--grain); background-repeat: repeat; background-attachment: fixed; color: var(--green-1); font-family: 'Space Mono', monospace; overflow-x: hidden; }
 
 /* ── NAV ── */
 nav {
@@ -1007,7 +1007,7 @@ footer {
 }
 
 /* ── TEMA CHIARO: grana uniforme; foto con overlay leggibile + logo sfocato ── */
-html{ background-color:var(--bg); background-image:var(--grain); background-repeat:repeat; }
+html{ background-color:var(--bg); background-image:var(--grain); background-repeat:repeat; background-attachment:fixed; }
 body{ background:transparent; }
 #hero::after, #manifesto::after{ background-color:rgba(240,237,232,0.82); }
 #upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
