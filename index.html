@@ -1014,8 +1014,8 @@ body{ background:transparent; }
 
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
 #place{position:relative}
-.place-scrolly{position:relative;height:240vh}
-.place-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background-color:var(--bg);background-image:var(--grain);background-repeat:repeat}
+.place-scrolly{position:relative;height:240vh;height:240svh}
+.place-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background-color:var(--bg);background-image:var(--grain);background-repeat:repeat}
 .place-stage{position:absolute;inset:0;will-change:opacity}
 .place-map{position:absolute;inset:0}
 .place-hud{position:absolute;inset:0;pointer-events:none}
@@ -1040,7 +1040,7 @@ body{ background:transparent; }
 .place-scrolly.flat .place-copy-in{padding:120px 40px}
 .place-scrolly.flat .place-ey,.place-scrolly.flat .place-h .ln1,.place-scrolly.flat .place-p,.place-scrolly.flat .place-meta{opacity:1}
 .place-scrolly.flat .place-h .ln2{opacity:1;color:var(--green-1)}
-@media (max-width:640px){ .place-copy-in{padding:0 24px} .place-meta{gap:24px} .place-tl{left:20px} }
+@media (max-width:640px){ .place-copy-in{padding:0 22px} .place-h{font-size:clamp(40px,12.5vw,70px);margin:12px 0 14px} .place-coords{font-size:12px;letter-spacing:.18em} .place-p{font-size:13px;line-height:1.85;margin-top:18px} .place-meta{gap:22px;margin-top:30px;padding-top:22px} .place-meta b{font-size:18px} .place-ey{font-size:10px} .place-tl{left:20px} }
 
 </style>
 </head>
@@ -1573,6 +1573,7 @@ function handleSubmit(e) {
   var scrolly=document.getElementById('place-scrolly');
   if(!scrolly) return;
   var stage=document.getElementById('place-stage');
+  var stickyEl=scrolly.querySelector('.place-sticky');
   var nameEl=document.getElementById('pl-name');
   var ey=document.getElementById('pl-ey'), ln1=document.getElementById('pl-ln1');
   var p1=document.getElementById('pl-p1'), p2=document.getElementById('pl-p2'), meta=document.getElementById('pl-meta');
@@ -1608,7 +1609,7 @@ function handleSubmit(e) {
   }
   function progress(){
     var rect=scrolly.getBoundingClientRect();
-    var total=scrolly.offsetHeight-window.innerHeight;
+    var total=scrolly.offsetHeight-stickyEl.offsetHeight;
     return clamp((-rect.top)/total,0,1);
   }
   function setGreen(o){ if(valtReady){map.setPaintProperty('valt-fill','fill-opacity',0.66*o);map.setPaintProperty('valt-glow','line-opacity',0.6*o);map.setPaintProperty('valt-line','line-opacity',o);} }
