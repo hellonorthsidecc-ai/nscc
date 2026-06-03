@@ -26,7 +26,10 @@
 <meta name="twitter:image" content="https://northsidecc.com/img/og.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&family=Russo+One&family=Space+Mono&display=swap" rel="stylesheet">
+<!-- Font titoli: Barlow Condensed (scelto). Alternative valutate (giu 2026), riattivabili dal var --font-display:
+     Space Grotesk (wght 700) · Syne (wght 800) · Russo One (400)
+     Variante "schiacciata" provata via transform: scaleX(1.14) scaleY(0.80) sui titoli display. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet">
 <style>
 
@@ -36,7 +39,7 @@
   --green-2:rgba(75,95,73,0.66); /* Forest Night attenuato — secondario */
   --line:rgba(75,95,73,0.22);
   --grain:url("img/grain.png");
-  --font-display: 'Barlow Condensed', sans-serif;  /* PREVIEW: cambiabile dal selettore */
+  --font-display: 'Barlow Condensed', sans-serif;  /* font titoli — cambia qui per swap globale */
   --font-display-weight: 700;
 }
 /* film grain come nel logo */
@@ -1700,35 +1703,6 @@ function handleSubmit(e) {
   init();
 })();
 </script>
-
-<!-- ════════ PREVIEW FONT SWITCHER — da rimuovere prima del push online ════════ -->
-<div id="font-switcher" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:6px;align-items:center;background:#1c1c1c;color:#eee;padding:8px 10px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.3);font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.02em">
-  <span style="opacity:.6;padding:0 4px">FONT TITOLI →</span>
-  <button data-f="'Barlow Condensed', sans-serif" data-w="700">Barlow (attuale)</button>
-  <button data-f="'Space Grotesk', sans-serif" data-w="700">Space Grotesk</button>
-  <button data-f="'Syne', sans-serif" data-w="800">Syne</button>
-  <button data-f="'Russo One', sans-serif" data-w="400">Russo One</button>
-</div>
-<style>
-  #font-switcher button{background:#333;color:#eee;border:1px solid #555;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;transition:all .15s}
-  #font-switcher button:hover{background:#444}
-  #font-switcher button.active{background:#4B5F49;border-color:#4B5F49;color:#fff;font-weight:700}
-</style>
-<script>
-(function(){
-  var sw=document.getElementById('font-switcher');
-  var root=document.documentElement.style;
-  var btns=sw.querySelectorAll('button');
-  function pick(b){
-    root.setProperty('--font-display', b.getAttribute('data-f'));
-    root.setProperty('--font-display-weight', b.getAttribute('data-w'));
-    btns.forEach(function(x){x.classList.toggle('active', x===b);});
-  }
-  btns.forEach(function(b){ b.addEventListener('click', function(){ pick(b); }); });
-  pick(btns[0]);
-})();
-</script>
-<!-- ════════ FINE PREVIEW FONT SWITCHER ════════ -->
 
 </body>
 </html>
