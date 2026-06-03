@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://northsidecc.com/img/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&family=Russo+One&family=Space+Mono&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet">
 <style>
 
@@ -36,6 +36,8 @@
   --green-2:rgba(75,95,73,0.66); /* Forest Night attenuato — secondario */
   --line:rgba(75,95,73,0.22);
   --grain:url("img/grain.png");
+  --font-display: 'Barlow Condensed', sans-serif;  /* PREVIEW: cambiabile dal selettore */
+  --font-display-weight: 700;
 }
 /* film grain come nel logo */
 body::before{
@@ -147,7 +149,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 .mobile-menu.open { opacity: 1; visibility: visible; }
 .mobile-menu a {
   color: var(--green-1);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-weight: 700;
   font-size: clamp(34px, 11vw, 52px);
   line-height: 1;
@@ -236,7 +238,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .hero-title {
   color: var(--green-1);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-size: clamp(2.5em, 6vw, 5em);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -409,7 +411,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .event-title {
   color: var(--green-1);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-size: clamp(2.6em, 7vw, 6em);
   font-weight: 700;
   text-transform: uppercase;
@@ -563,7 +565,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .manifesto-title {
   color: var(--green-1);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-size: clamp(1.8em, 3.5vw, 3em);
   font-weight: 700;
   text-transform: uppercase;
@@ -652,7 +654,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .how-title {
   color: var(--green-2);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-size: 2.2em;
   font-weight: 700;
   text-transform: uppercase;
@@ -820,7 +822,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 .morethan-title {
   color: var(--green-1);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display); font-weight: var(--font-display-weight);
   font-size: clamp(1.6em, 7vw, 5em);
   font-weight: 700;
   text-transform: uppercase;
@@ -1030,7 +1032,7 @@ body{ background:transparent; }
 .place-copy{position:absolute;inset:0;display:flex;align-items:center;z-index:6;pointer-events:none}
 .place-copy-in{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;text-align:center;transform:translateY(22px)}
 .place-ey{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--green-1);opacity:0}
-.place-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:14px 0 18px}
+.place-h{font-family:var(--font-display);font-weight:var(--font-display-weight);font-size:clamp(54px,10vw,140px);line-height:.9;text-transform:uppercase;margin:14px 0 18px}
 .place-h .ln1{display:block;color:var(--green-1);opacity:0}
 .place-h .ln2{display:block;color:#F0EDE8;opacity:0}
 .place-coords{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.28em;color:var(--green-1)}
@@ -1038,7 +1040,7 @@ body{ background:transparent; }
 .place-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin:42px auto 0;border-top:1px solid var(--line);padding-top:28px;max-width:680px;opacity:0}
 .place-meta div{display:flex;flex-direction:column;gap:6px}
 .place-meta span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-2)}
-.place-meta b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--green-1)}
+.place-meta b{font-family:var(--font-display);font-weight:var(--font-display-weight);font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--green-1)}
 .place-scrolly.flat{height:auto}
 .place-scrolly.flat .place-sticky{position:relative;height:auto;background:transparent}
 .place-scrolly.flat .place-stage{display:none}
@@ -1698,5 +1700,35 @@ function handleSubmit(e) {
   init();
 })();
 </script>
+
+<!-- ════════ PREVIEW FONT SWITCHER — da rimuovere prima del push online ════════ -->
+<div id="font-switcher" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:6px;align-items:center;background:#1c1c1c;color:#eee;padding:8px 10px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.3);font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.02em">
+  <span style="opacity:.6;padding:0 4px">FONT TITOLI →</span>
+  <button data-f="'Barlow Condensed', sans-serif" data-w="700">Barlow (attuale)</button>
+  <button data-f="'Space Grotesk', sans-serif" data-w="700">Space Grotesk</button>
+  <button data-f="'Syne', sans-serif" data-w="800">Syne</button>
+  <button data-f="'Russo One', sans-serif" data-w="400">Russo One</button>
+</div>
+<style>
+  #font-switcher button{background:#333;color:#eee;border:1px solid #555;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;transition:all .15s}
+  #font-switcher button:hover{background:#444}
+  #font-switcher button.active{background:#4B5F49;border-color:#4B5F49;color:#fff;font-weight:700}
+</style>
+<script>
+(function(){
+  var sw=document.getElementById('font-switcher');
+  var root=document.documentElement.style;
+  var btns=sw.querySelectorAll('button');
+  function pick(b){
+    root.setProperty('--font-display', b.getAttribute('data-f'));
+    root.setProperty('--font-display-weight', b.getAttribute('data-w'));
+    btns.forEach(function(x){x.classList.toggle('active', x===b);});
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ pick(b); }); });
+  pick(btns[0]);
+})();
+</script>
+<!-- ════════ FINE PREVIEW FONT SWITCHER ════════ -->
+
 </body>
 </html>
