@@ -28,7 +28,7 @@
 :root{
   --bg:#F0EDE8;
   --green-1:#4B5F49;
-  --green-2:rgba(75,95,73,0.66);
+  --green-2:rgba(75,95,73,0.88);
   --line:rgba(75,95,73,0.22);
   --grain:url("img/grain.png");
 }
@@ -65,6 +65,12 @@ body::after{
 @media (prefers-reduced-motion: reduce){ body::after{animation:none} .bg-blobs::before{animation:none} }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* focus visibile da tastiera (non interferisce col mouse) */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--green-1);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
 html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 body { background: var(--bg); color: var(--green-1); font-family: 'Space Mono', monospace; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
 
@@ -77,8 +83,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 24px 40px;
-  background: rgba(240,237,232,0.92);
-  border-bottom: 1px solid var(--line);
+  background: linear-gradient(to bottom, rgba(240,237,232,0.92) 0%, transparent 100%);
   transform: translateY(0);
   transition: transform 0.35s cubic-bezier(.4,0,.2,1);
   will-change: transform;
@@ -166,7 +171,6 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   text-transform: uppercase; font-size: clamp(2.6em, 6vw, 4.5em); line-height: 1;
   letter-spacing: 0.03em; margin: 0 0 16px 0;
 }
-.pd-price { color: var(--green-1); font-size: 14px; letter-spacing: 0.1em; margin-bottom: 34px; }
 .pd-desc { color: var(--green-1); opacity: 0.9; font-size: 13px; line-height: 1.95; max-width: 420px; margin-bottom: 34px; }
 .pd-details { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 36px; max-width: 420px; }
 .pd-details li {
@@ -174,17 +178,6 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   border-top: 1px solid var(--line); padding: 12px 0;
 }
 .pd-soon { color: var(--green-2); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
-.pd-colours { margin-bottom: 34px; }
-.pd-col-label { color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 14px; }
-.pd-swatches { display: flex; gap: 14px; align-items: center; }
-.pd-swatch {
-  width: 26px; height: 26px; border-radius: 50%;
-  border: 1px solid var(--line); cursor: pointer; padding: 0;
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-.pd-swatch:hover { border-color: var(--green-2); }
-.pd-swatch.active { border-color: var(--green-1); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--green-1); }
-.pd-col-name { color: var(--green-1); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 4px; }
 @media (max-width: 768px) {
   .pd { padding: 100px 24px 70px 24px; }
   .pd-grid { flex-direction: column; gap: 36px; }
@@ -216,12 +209,12 @@ footer { background: var(--bg); border-top: 1px solid var(--line); padding: 32px
 }
 .footer-legal { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 30px; }
 .footer-copy {
-  color: var(--green-2); font-family: 'Space Mono', monospace; font-size: 9px;
+  color: var(--green-2); font-family: 'Space Mono', monospace; font-size: 11px;
   letter-spacing: 0.15em; text-transform: uppercase; margin: 0;
 }
 .footer-links { display: flex; gap: 20px; }
 .footer-links a {
-  color: var(--green-2); font-family: 'Space Mono', monospace; font-size: 9px;
+  color: var(--green-2); font-family: 'Space Mono', monospace; font-size: 11px;
   letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
   opacity: 0.85; transition: color 0.2s;
 }
@@ -262,7 +255,7 @@ footer{ background:transparent; }
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/"><img src="img/logo.png" alt="NSCC"></a>
+  <a class="nav-logo" href="/"><img src="img/logo-full.png" alt="NSCC"></a>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
     <li><a href="/#upcoming">Rides</a></li>
@@ -308,10 +301,10 @@ footer{ background:transparent; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <a class="footer-logo" href="/"><img src="img/logo.png" alt="NSCC"></a>
+    <a class="footer-logo" href="/"><img src="img/logo-full.png" alt="NSCC"></a>
     <div class="footer-social">
       <a href="https://www.instagram.com/northsidecc_/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.strava.com/clubs/northsidecc" target="_blank" rel="noopener">Strava</a>
+      <a href="https://strava.app.link/X5CV69eqA3b" target="_blank" rel="noopener">Strava</a>
     </div>
     <div class="footer-info">
       <div>Northside Cycling Club</div>

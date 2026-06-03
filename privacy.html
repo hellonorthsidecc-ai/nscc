@@ -17,7 +17,7 @@
 :root{
   --bg:#F0EDE8;
   --green-1:#4B5F49;
-  --green-2:rgba(75,95,73,0.66);
+  --green-2:rgba(75,95,73,0.88);
   --line:rgba(75,95,73,0.22);
   --grain:url("img/grain.png");
 }
@@ -54,6 +54,12 @@ body::after{
 @media (prefers-reduced-motion: reduce){ body::after{animation:none} .bg-blobs::before{animation:none} }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* focus visibile da tastiera (non interferisce col mouse) */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--green-1);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--green-1); font-family: 'Space Mono', monospace; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
 
@@ -136,7 +142,7 @@ footer {
 .footer-copy, .footer-links a {
   color: var(--green-2);
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -166,7 +172,7 @@ footer{ background:transparent; }
 <div class="bg-blobs" aria-hidden="true"></div>
 
 <nav>
-  <a class="nav-logo" href="/"><img src="img/logo.png" alt="NSCC"></a>
+  <a class="nav-logo" href="/"><img src="img/logo-full.png" alt="NSCC"></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="join">Join</a>
