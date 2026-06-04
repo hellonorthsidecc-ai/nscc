@@ -10,7 +10,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="img/hero.jpg?v=7">
+<link rel="preload" as="image" href="img/hero.jpg?v=10" media="(min-width: 769px)">
+<link rel="preload" as="image" href="img/hero-mobile.jpg?v=1" media="(max-width: 768px)">
 <meta name="theme-color" content="#F0EDE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Northside Cycling Club">
@@ -224,7 +225,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   flex-direction: column;
   justify-content: space-between;
   padding: 0 40px 32px 40px;
-  background-image: url('img/hero.jpg?v=7');
+  background-image: url('img/hero.jpg?v=10');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -376,7 +377,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @media (max-width: 768px) {
-  #hero { padding: 0 24px max(36px, env(safe-area-inset-bottom, 0px)) 24px; }
+  #hero { padding: 0 24px max(36px, env(safe-area-inset-bottom, 0px)) 24px; background-image: url('img/hero-mobile.jpg?v=1'); }
   .hero-title { font-size: clamp(2em, 8vw, 3em); }
   .hero-claim { font-size: 9px; white-space: normal; text-align: center; }
   .hero-bottom { flex-direction: column; align-items: center; gap: 14px; }
@@ -814,14 +815,27 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 /* ── MORE THAN ── */
 #morethan {
   position: relative;
-  background: var(--bg);
-  border-top: 1px solid var(--line);
+  background-color: var(--green-1);
+  background-image: url('img/morethan.jpg?v=3');
+  background-size: cover;
+  background-position: center;
   min-height: 72vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 90px 40px;
   overflow: hidden;
+}
+/* Velo bianco sopra la foto: la parola verde resta leggibile */
+#morethan::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(240,237,232,0.48);
+  background-image: var(--grain);
+  background-repeat: repeat;
+  pointer-events: none;
 }
 .mt-bg {
   position: absolute;
@@ -877,8 +891,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   color: var(--green-1);
 }
 @media (max-width: 768px) {
-  #morethan { min-height: 70vh; padding: 80px 16px; }
-  .mt-bg img { width: 90%; max-width: 90vw; filter: blur(5px); opacity: 0.38; }
+  #morethan { min-height: 70vh; padding: 80px 16px; background-image: url('img/morethan-mobile.jpg?v=1'); }
   .morethan-title { font-size: 7.4vw; letter-spacing: 0.03em; }
 }
 
@@ -1048,7 +1061,7 @@ html{ background-color:var(--bg); }
 body{ background:transparent; }
 #manifesto::after{ background-color:rgba(240,237,232,0.82); }
 #hero::after{ background-color:rgba(240,237,232,0.40); }
-#upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
+#upcoming,#how,#behind,#join,footer{ background:transparent; }
 
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
 #place{position:relative}
@@ -1232,7 +1245,6 @@ body{ background:transparent; }
 
 <!-- MORE THAN -->
 <section id="morethan">
-  <div class="mt-bg" aria-hidden="true"><img src="img/logo.png" alt="" loading="lazy"></div>
   <div class="mt-center">
     <h2 class="morethan-title">
       <span class="mt-slot"><span class="mt-sizer" aria-hidden="true">community</span><span id="mt-word">cycling</span></span>
