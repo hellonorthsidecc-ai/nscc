@@ -197,6 +197,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   list-style: none;
 }
 .nav-links a {
+  position: relative;
   color: var(--green-1);
   font-family: 'Space Mono', monospace;
   font-size: 13px;
@@ -207,6 +208,21 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   transition: opacity 0.2s;
 }
 .nav-links a:hover { opacity: 1; }
+/* Riga animata sotto al link al passaggio del mouse (sx -> dx) */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1px;
+  background: var(--green-1);
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a:hover::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a::after { transition: none; }
+}
 @media (max-width: 640px) {
   nav { padding: 18px 20px; }
   .nav-logo { position: relative; z-index: 101; }
