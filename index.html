@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="img/hero.jpg">
+<link rel="preload" as="image" href="img/hero.jpg?v=7">
 <meta name="theme-color" content="#F0EDE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Northside Cycling Club">
@@ -224,7 +224,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   flex-direction: column;
   justify-content: space-between;
   padding: 0 40px 32px 40px;
-  background-image: url('img/hero.jpg');
+  background-image: url('img/hero.jpg?v=7');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -233,8 +233,18 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(240,237,232,0.84); background-image: var(--grain); background-repeat: repeat;
+  background-color: rgba(240,237,232,0.40); background-image: var(--grain); background-repeat: repeat;
   z-index: 0;
+}
+/* Sfumatura chiara in fondo: rende leggibili le scritte in basso */
+#hero::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 42%;
+  background: linear-gradient(to top, rgba(240,237,232,0.62) 0%, rgba(240,237,232,0) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 #hero > * { position: relative; z-index: 1; }
 .hero-center {
@@ -283,6 +293,9 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   margin: 0;
   white-space: nowrap;
 }
+/* Scritte in basso della hero: verde scuro come il resto */
+#hero .hero-coords { color: var(--green-1); }
+#hero .hero-btn { color: var(--green-1); }
 /* ── UNDERLINE ANIMATION (sx→dx) ── */
 .underline-anim {
   position: relative;
@@ -1033,7 +1046,8 @@ footer {
 /* ── TEMA CHIARO: grana uniforme; foto con overlay leggibile + logo sfocato ── */
 html{ background-color:var(--bg); }
 body{ background:transparent; }
-#hero::after, #manifesto::after{ background-color:rgba(240,237,232,0.82); }
+#manifesto::after{ background-color:rgba(240,237,232,0.82); }
+#hero::after{ background-color:rgba(240,237,232,0.40); }
 #upcoming,#how,#behind,#morethan,#join,footer{ background:transparent; }
 
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
@@ -1392,8 +1406,8 @@ window.addEventListener('load', function() {
   if (l1) scrambleLoop(l1, 'Northside', 7000, 0);
   if (l2) scrambleLoop(l2, 'Cycling Club', 7000, 200);
   if (claim) typeLoop(claim, [
-    'Rides · Mountains · Culture · Mostly people',
     'A cycling club from the north of Italy.',
+    'Rides · Mountains · Culture · Mostly people',
     'Valtellina, IT · Est. 2026'
   ], 40, 1500);
 
