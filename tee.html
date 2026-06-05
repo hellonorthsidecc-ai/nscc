@@ -199,21 +199,14 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 
 .tee-foot { margin-top: clamp(40px, 6vw, 72px); }
 .tee-specs {
-  list-style: none; display: flex; flex-wrap: wrap; gap: 10px 26px;
-  border-top: 1px solid var(--line); padding-top: 20px; margin: 0 0 20px;
+  list-style: none; display: flex; flex-direction: column;
+  border-top: 1px solid var(--line); margin: 0 0 26px; padding: 0;
+  max-width: 420px;
 }
 .tee-specs li {
   color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-  position: relative; padding-right: 26px;
+  border-bottom: 1px solid var(--line); padding: 13px 0;
 }
-.tee-specs li:not(:last-child)::after {
-  content: '·'; position: absolute; right: 7px; opacity: 0.6;
-}
-.tee-foot-row {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap;
-  border-top: 1px solid var(--line); padding-top: 18px;
-}
-.tee-route { color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.9; }
 .tee-soon { color: var(--green-1); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
 
 @media (max-width: 860px) {
@@ -366,9 +359,7 @@ footer{ background:transparent; }
       <li>Sizes S–XL</li>
       <li>Three colourways</li>
     </ul>
-    <div class="tee-foot-row">
-      <p class="tee-soon">Available soon</p>
-    </div>
+    <p class="tee-soon">Available soon</p>
   </div>
 </main>
 
