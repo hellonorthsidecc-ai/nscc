@@ -30,6 +30,7 @@
   --green-1:#4B5F49;
   --green-2:rgba(75,95,73,0.88);
   --line:rgba(75,95,73,0.22);
+  --line-2:rgba(75,95,73,0.5);
   --grain:url("img/grain.png");
 }
 body::after{
@@ -147,43 +148,82 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   color: var(--green-2); font-weight: 400; opacity: 0.8;
 }
 
-/* ── PRODUCT DETAIL ── */
-.pd { flex: 1; padding: 120px 40px 90px 40px; }
-.pd-back {
+/* ── TEE LOOKBOOK ── */
+.tee { flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: 120px 40px 90px; }
+.tee-back {
   color: var(--green-2); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-  text-decoration: none; display: inline-block; margin-bottom: 48px; transition: color 0.2s;
+  text-decoration: none; display: inline-block; margin-bottom: 44px; transition: color 0.2s;
 }
-.pd-back:hover { color: var(--green-1); }
-.pd-grid { display: flex; gap: 64px; align-items: flex-start; }
-.pd-media {
-  flex: 0 0 460px;
-  max-width: 460px;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: center;
-  padding: 7%;
-}
-.pd-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.pd-info { flex: 1; padding-top: 6px; }
-.pd-num { color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; }
-.pd-name {
+.tee-back:hover { color: var(--green-1); }
+
+.tee-head { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px 64px; align-items: end; }
+.tee-tag { color: var(--green-2); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 16px; }
+.tee-name {
   color: var(--green-1); font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  text-transform: uppercase; font-size: clamp(2.6em, 6vw, 4.5em); line-height: 1;
-  letter-spacing: 0.03em; margin: 0 0 16px 0;
+  text-transform: uppercase; font-size: clamp(3.4em, 9vw, 7em); line-height: 0.9;
+  letter-spacing: 0.02em; margin: 0;
 }
-.pd-desc { color: var(--green-1); opacity: 0.9; font-size: 13px; line-height: 1.95; max-width: 420px; margin-bottom: 34px; }
-.pd-details { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 36px; max-width: 420px; }
-.pd-details li {
-  color: var(--green-2); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  border-top: 1px solid var(--line); padding: 12px 0;
+.tee-desc { color: var(--green-1); opacity: 0.9; font-size: 13px; line-height: 1.95; max-width: 380px; margin: 0; }
+
+/* color switch */
+.tee-colors { display: flex; align-items: center; gap: 26px; margin: 54px 0 26px; flex-wrap: wrap; }
+.tee-colors-label { color: var(--green-2); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; }
+.swatch {
+  background: none; border: none; cursor: pointer; padding: 0;
+  display: inline-flex; align-items: center; gap: 9px;
+  color: var(--green-2); font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  opacity: 0.6; transition: opacity 0.2s;
 }
-.pd-soon { color: var(--green-2); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.swatch:hover { opacity: 0.85; }
+.swatch.active { opacity: 1; color: var(--green-1); }
+.swatch .dot {
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid var(--line-2); transition: box-shadow 0.2s, transform 0.2s;
+}
+.swatch.active .dot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--green-1); transform: scale(1.05); }
+.swatch[data-color="bianco"] .dot { background: #f3f1ec; }
+.swatch[data-color="verde"]  .dot { background: #4B5F49; }
+.swatch[data-color="nero"]   .dot { background: #1c2024; }
+
+/* plates */
+.tee-plates { position: relative; }
+.plate-pair { display: none; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 28px); }
+.plate-pair.active { display: grid; }
+.plate { border: 1px solid var(--line); overflow: hidden; background: #fff; }
+.plate img { width: 100%; height: auto; display: block; }
+.plate-cap {
+  margin-top: 10px; color: var(--green-2);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+.tee-foot { margin-top: clamp(40px, 6vw, 72px); }
+.tee-specs {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 10px 26px;
+  border-top: 1px solid var(--line); padding-top: 20px; margin: 0 0 20px;
+}
+.tee-specs li {
+  color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  position: relative; padding-right: 26px;
+}
+.tee-specs li:not(:last-child)::after {
+  content: '·'; position: absolute; right: 7px; opacity: 0.6;
+}
+.tee-foot-row {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap;
+  border-top: 1px solid var(--line); padding-top: 18px;
+}
+.tee-route { color: var(--green-2); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.9; }
+.tee-soon { color: var(--green-1); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+
+@media (max-width: 860px) {
+  .tee-head { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+}
 @media (max-width: 768px) {
-  .pd { padding: 100px 24px 70px 24px; }
-  .pd-grid { flex-direction: column; gap: 36px; }
-  .pd-media { flex: none; width: 100%; max-width: none; aspect-ratio: 1 / 1; padding: 10%; }
-  .pd-back { margin-bottom: 32px; }
-  .pd-name { font-size: clamp(2.4em, 11vw, 3.6em); }
+  .tee { padding: 100px 24px 70px; }
+  .tee-back { margin-bottom: 32px; }
+  .plate-pair { grid-template-columns: 1fr; gap: 22px; }
+  .tee-colors { gap: 20px; }
 }
 
 /* ── FOOTER ── */
@@ -279,21 +319,56 @@ footer{ background:transparent; }
   <span class="mm-coords">46°10'N · 09°52'E · Valtellina, IT</span>
 </div>
 
-<!-- SHOP -->
-<main class="pd">
-  <a class="pd-back" href="merch">← Merch</a>
-  <div class="pd-grid">
-    <div class="pd-media"><img id="pd-img" src="img/tshirt.png" alt="NSCC heavyweight cotton tee"></div>
-    <div class="pd-info">
-      <p class="pd-num">01</p>
-      <h1 class="pd-name">Tee</h1>
-      <p class="pd-desc">Heavyweight cotton tee with the NSCC wordmark across the back and a small mark on the chest. Boxy, relaxed fit for off the bike.</p>
-      <ul class="pd-details">
-        <li>100% cotton</li>
-        <li>Oversized fit</li>
-        <li>Sizes S–XL</li>
-      </ul>
-      <p class="pd-soon">Available soon</p>
+<!-- TEE LOOKBOOK -->
+<main class="tee">
+  <a class="tee-back" href="merch">← Merch</a>
+
+  <div class="tee-head">
+    <div>
+      <p class="tee-tag">Drop 01 · Apparel · 01</p>
+      <h1 class="tee-name">Tee</h1>
+    </div>
+    <p class="tee-desc">Heavyweight cotton. Small mark on the chest, the route across the back. Boxy, relaxed cut for off the bike.</p>
+  </div>
+
+  <div class="tee-colors" role="group" aria-label="Colour">
+    <span class="tee-colors-label">Colour</span>
+    <button class="swatch active" data-color="bianco" aria-pressed="true"><span class="dot"></span>Bianco</button>
+    <button class="swatch" data-color="verde" aria-pressed="false"><span class="dot"></span>Verde</button>
+    <button class="swatch" data-color="nero" aria-pressed="false"><span class="dot"></span>Nero</button>
+  </div>
+
+  <div class="tee-plates">
+    <div class="plate-pair active" data-color="bianco">
+      <figure class="plate"><img src="img/tee/tee-white-front.jpg" alt="NSCC tee, white — front, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-white-back.jpg" alt="NSCC tee, white — back, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-white-front-flat.jpg" alt="NSCC tee, white — front" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-white-back-flat.jpg" alt="NSCC tee, white — back" loading="lazy"></figure>
+    </div>
+    <div class="plate-pair" data-color="verde">
+      <figure class="plate"><img src="img/tee/tee-green-front.jpg" alt="NSCC tee, green — front, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-green-back.jpg" alt="NSCC tee, green — back, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-green-front-flat.jpg" alt="NSCC tee, green — front" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-green-back-flat.jpg" alt="NSCC tee, green — back" loading="lazy"></figure>
+    </div>
+    <div class="plate-pair" data-color="nero">
+      <figure class="plate"><img src="img/tee/tee-black-front.jpg" alt="NSCC tee, black — front, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-black-back.jpg" alt="NSCC tee, black — back, on model" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-black-front-flat.jpg" alt="NSCC tee, black — front" loading="lazy"></figure>
+      <figure class="plate"><img src="img/tee/tee-black-back-flat.jpg" alt="NSCC tee, black — back" loading="lazy"></figure>
+    </div>
+  </div>
+
+  <div class="tee-foot">
+    <ul class="tee-specs">
+      <li>Heavyweight cotton</li>
+      <li>Boxy oversized fit</li>
+      <li>Sizes S–XL</li>
+      <li>Three colourways</li>
+    </ul>
+    <div class="tee-foot-row">
+      <p class="tee-route">Back print · Route #001 — Valtellina · 46°10'N · 09°52'E</p>
+      <p class="tee-soon">Available soon</p>
     </div>
   </div>
 </main>
@@ -320,6 +395,27 @@ footer{ background:transparent; }
   </div>
 </footer>
 
+<script>
+// ── COLOUR SWITCH ──
+(function () {
+  var swatches = document.querySelectorAll('.swatch');
+  var pairs = document.querySelectorAll('.plate-pair');
+  if (!swatches.length) return;
+  swatches.forEach(function (sw) {
+    sw.addEventListener('click', function () {
+      var c = sw.getAttribute('data-color');
+      swatches.forEach(function (s) {
+        var on = s === sw;
+        s.classList.toggle('active', on);
+        s.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      pairs.forEach(function (p) {
+        p.classList.toggle('active', p.getAttribute('data-color') === c);
+      });
+    });
+  });
+})();
+</script>
 <script>
 // ── HIDE NAV ON SCROLL DOWN, SHOW ON SCROLL UP ──
 (function () {
