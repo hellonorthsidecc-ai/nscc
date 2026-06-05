@@ -1452,23 +1452,30 @@ window.addEventListener('load', function() {
     } catch (e) {}
   }
   var rtLooping = false;
-  function runRoute() {            // parte da meta traccia e si disegna verso i due lati, poi ricomincia
+  function runRoute() {            // disegna la traccia, pausa, dissolve dolcemente e ricomincia (loop pulito)
     if (!rtPath || rtLooping) return;
     if (rtReduce) { rtPath.style.strokeDasharray = 'none'; rtPath.style.strokeDashoffset = '0'; return; }
     rtLooping = true;
-    rtPath.style.transition = 'none';
-    rtPath.style.strokeDashoffset = '0';
-    var M = rtLen / 2;             // centro del tracciato
-    var T = 3600, hold = 2200, start = null;
-    function ease(t){ return 1 - Math.pow(1 - t, 3); }   // ease-out
-    function frame(ts){
-      if (start === null) start = ts;
-      var el = ts - start, g = M * ease(Math.min(el / T, 1));
-      rtPath.style.strokeDasharray = '0 ' + (M - g) + ' ' + (2 * g) + ' ' + rtLen;  // finestra che cresce dal centro
-      if (el >= T + hold) start = ts;     // ricomincia dal centro
-      requestAnimationFrame(frame);
+    var DRAW = 3200, HOLD = 2200, FADE = 900;   // disegno / pausa a pieno / dissolvenza
+    rtPath.style.strokeDasharray = rtLen;
+    function cycle() {
+      // reset: traccia nascosta (offset pieno) e opacità ripristinata — niente è visibile, nessuno scatto
+      rtPath.style.transition = 'none';
+      rtPath.style.strokeDashoffset = rtLen;
+      rtPath.style.opacity = '0.9';
+      rtPath.getBoundingClientRect();          // forza il reflow così il reset viene applicato prima del disegno
+      // disegno a velocita costante (ritmo uniforme)
+      rtPath.style.transition = 'stroke-dashoffset ' + DRAW + 'ms linear';
+      rtPath.style.strokeDashoffset = '0';
+      // dopo disegno + pausa: dissolvenza dolce dell'intera traccia
+      setTimeout(function() {
+        rtPath.style.transition = 'opacity ' + FADE + 'ms ease';
+        rtPath.style.opacity = '0';
+      }, DRAW + HOLD);
+      // a dissolvenza finita: ricomincia (a quel punto la traccia è già invisibile)
+      setTimeout(cycle, DRAW + HOLD + FADE);
     }
-    requestAnimationFrame(frame);
+    cycle();
   }
 
   // Event animation
