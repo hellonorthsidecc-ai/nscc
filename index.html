@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="img/hero.jpg?v=10" media="(min-width: 769px)">
-<link rel="preload" as="image" href="img/hero-mobile.jpg?v=1" media="(max-width: 768px)">
+<link rel="preload" as="image" href="img/hero.jpg?v=15" media="(min-width: 769px)">
+<link rel="preload" as="image" href="img/hero-mobile.jpg?v=6" media="(max-width: 768px)">
 <meta name="theme-color" content="#F0EDE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Northside Cycling Club">
@@ -112,7 +112,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 24px 40px;
-  background: linear-gradient(to bottom, rgba(240,237,232,0.92) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(240,237,232,0.55) 0%, transparent 100%);
   transform: translateY(0);
   transition: transform 0.35s cubic-bezier(.4,0,.2,1);
   will-change: transform;
@@ -241,16 +241,16 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
   flex-direction: column;
   justify-content: space-between;
   padding: 0 40px 32px 40px;
-  background-image: url('img/hero.jpg?v=10');
+  background-image: url('img/hero.jpg?v=15');
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   position: relative;
 }
 #hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(240,237,232,0.40); background-image: var(--grain); background-repeat: repeat;
+  background-color: rgba(240,237,232,0.58); background-image: var(--grain); background-repeat: repeat;
   z-index: 0;
 }
 /* Sfumatura chiara in fondo: rende leggibili le scritte in basso */
@@ -393,7 +393,7 @@ nav.menu-open .nav-toggle span:nth-child(2) { top: 7px; transform: rotate(-45deg
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @media (max-width: 768px) {
-  #hero { padding: 0 24px max(36px, env(safe-area-inset-bottom, 0px)) 24px; background-image: url('img/hero-mobile.jpg?v=1'); }
+  #hero { padding: 0 24px max(36px, env(safe-area-inset-bottom, 0px)) 24px; background-image: url('img/hero-mobile.jpg?v=6'); }
   .hero-title { font-size: clamp(2em, 8vw, 3em); }
   .hero-claim { font-size: 9px; white-space: normal; text-align: center; }
   .hero-bottom { flex-direction: column; align-items: center; gap: 14px; }
@@ -1076,7 +1076,7 @@ footer {
 html{ background-color:var(--bg); }
 body{ background:transparent; }
 #manifesto::after{ background-color:rgba(240,237,232,0.82); }
-#hero::after{ background-color:rgba(240,237,232,0.40); }
+#hero::after{ background-color:rgba(240,237,232,0.58); }
 #upcoming,#how,#behind,#join,footer{ background:transparent; }
 
 /* ── THE PLACE (scroll-driven map -> dissolve -> copy) ── */
@@ -1249,7 +1249,7 @@ body{ background:transparent; }
 <section id="behind">
   <h2 class="behind-title">Behind NSCC</h2>
   <div class="behind-photo-wrap">
-    <img class="behind-photo" src="img/matenri.jpeg" alt="Enri and Matti, founders of NSCC" loading="lazy" decoding="async">
+    <img class="behind-photo" src="img/behind.jpg?v=1" alt="Enri and Matti, founders of NSCC" loading="lazy" decoding="async">
     <div class="behind-names">
       <span class="behind-name">Enri</span>
       <div class="behind-line"></div>
